@@ -1,1 +1,14 @@
-
+spring:
+  profiles:
+    active: local
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+  datasource:
+    url: jdbc:postgresql://localhost:5432/desafio7
+    username: postgres
+    password: 12111921@Lari
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
