@@ -25,6 +25,9 @@ public class Corrida {
     @ManyToOne
     private Motorista motorista;
 
+    @ManyToOne
+    private Passageiro passageiro;
+
     private CorridaEnum status = CorridaEnum.PENDENTE;
 
 }

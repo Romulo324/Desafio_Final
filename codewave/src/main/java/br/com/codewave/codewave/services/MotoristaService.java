@@ -4,10 +4,12 @@ import br.com.codewave.codewave.Models.Corrida;
 import br.com.codewave.codewave.Models.Motorista;
 import br.com.codewave.codewave.repositories.MotoristaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class MotoristaService {
     @Autowired
     public MotoristaRepository motoristaRepository;
