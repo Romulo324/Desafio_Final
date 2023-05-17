@@ -13,7 +13,6 @@ public class Corrida {
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Integer id;
 
-
     @Column(precision = 10, scale = 2, name = "valor_a_receber")
     private BigDecimal valorAReceber;
 
@@ -26,7 +25,6 @@ public class Corrida {
     @ManyToOne
     private Motorista motorista;
 
-
-
+    private CorridaEnum status = CorridaEnum.PENDENTE;
 
 }
