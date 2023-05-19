@@ -1,6 +1,6 @@
 package br.com.codewave.codewave.services;
 
-import br.com.codewave.codewave.Models.Corrida;
+
 import br.com.codewave.codewave.Models.Motorista;
 import br.com.codewave.codewave.repositories.MotoristaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +42,4 @@ public class MotoristaService {
             motoristaRepository.deleteById(id);
         }
     }
-    
 }

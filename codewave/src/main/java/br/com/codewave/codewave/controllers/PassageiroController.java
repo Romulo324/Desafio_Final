@@ -23,9 +23,11 @@ public class PassageiroController {
 
     @PostMapping(value = "/nova")
     public ResponseEntity novaCorrida(@RequestBody Passageiro passageiro,
-                                      @RequestParam Integer codigo) {
+                                      @RequestParam Integer corridaId,
+                                      @RequestParam Integer id1) {
 
-        passageiro.setCorrida(corridaService.acharPorId(codigo));
+        passageiro.setCorrida(corridaService.acharPorId(corridaId));
+
 
         try {
             passageiroService.adicionar(passageiro);

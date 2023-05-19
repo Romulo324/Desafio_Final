@@ -23,6 +23,8 @@ public class Passageiro {
     @Column(length = 25, name = "numero_de_telefone")
     private String numeroDeTelefone;
 
+    private String cancelarCorrida;
+    private String aceitarCorrida;
     @ManyToOne
     private Corrida corrida;
 }

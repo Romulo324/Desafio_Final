@@ -1,6 +1,8 @@
 package br.com.codewave.codewave.controllers;
 
+import br.com.codewave.codewave.Models.Corrida;
 import br.com.codewave.codewave.Models.Motorista;
+import br.com.codewave.codewave.services.CorridaService;
 import br.com.codewave.codewave.services.EmpresaService;
 import br.com.codewave.codewave.services.MotoristaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +22,15 @@ public class MotoristaController {
     @Autowired
     private EmpresaService empresaService;
 
+    @Autowired
+    private CorridaService corridaService;
+
 
     @PostMapping(value = "/novo")
     public ResponseEntity novoMotorista(@RequestBody Motorista motorista,
-                                        @RequestParam Integer codigo) {
+                                        @RequestParam(required = false) Integer empresaId) {
 
-        motorista.setEmpresa(empresaService.acharPorId(codigo));
+        motorista.setEmpresa(empresaService.acharPorId(empresaId));
 
         try {
             motoristaService.adicionar(motorista);
@@ -57,7 +62,7 @@ public class MotoristaController {
     public ResponseEntity atualizar(@PathVariable Integer id , @RequestBody Motorista motorista) {
         motoristaService.atualizar(id, motorista);
         try {
-            return new ResponseEntity("Motorista atualizado com sucesso!" , HttpStatus.OK);
+            return new ResponseEntity("Motorista " + id + "atualizado com sucesso!" , HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity("Esse id não existe!" , HttpStatus.NOT_FOUND);
         }
@@ -71,5 +76,25 @@ public class MotoristaController {
         } catch (NoSuchElementException e) {
             return new ResponseEntity("Esse id não existe!" , HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PutMapping(value = "/aceitar")
+    public ResponseEntity aceitarCorrida(@PathVariable Integer id , @RequestBody Corrida corrida) {
+        try {
+            corridaService.aceitarCorrida(corrida, id);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity("Esse id não existe!" , HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity("Corrida " + id + " aceita!" , HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/finalizar")
+    public ResponseEntity finalizarCorrida(@PathVariable Integer id , @RequestBody Corrida corrida) {
+        try {
+            corridaService.finalizarCorrida(corrida, id);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity("Esse id não existe!" , HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity("Corrida " + id + " finalizada!" , HttpStatus.OK);
     }
 }

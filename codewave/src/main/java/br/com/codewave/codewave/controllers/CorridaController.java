@@ -1,6 +1,7 @@
 package br.com.codewave.codewave.controllers;
 
 import br.com.codewave.codewave.Models.Corrida;
+import br.com.codewave.codewave.Models.CorridaEnum;
 import br.com.codewave.codewave.Models.Motorista;
 import br.com.codewave.codewave.Models.Passageiro;
 import br.com.codewave.codewave.services.CorridaService;
@@ -29,11 +30,11 @@ public class CorridaController {
 
     @PostMapping(value = "/nova")
     public ResponseEntity novaCorrida(@RequestBody Corrida corrida,
-                                      @RequestParam Integer code1,
-                                      @RequestParam Integer code2,
-                                      @RequestParam Integer code3) {
-        corrida.setMotorista(motoristaService.acharPorId(code1));
-        corrida.setPassageiro(passageiroService.acharPorId(code2));
+                                      @RequestParam Integer motoristaId,
+                                      @RequestParam Integer passageiroId) {
+        corrida.setMotorista(motoristaService.acharPorId(motoristaId));
+        corrida.setPassageiro(passageiroService.acharPorId(passageiroId));
+
 
         try {
             corridaService.adicionar(corrida);
