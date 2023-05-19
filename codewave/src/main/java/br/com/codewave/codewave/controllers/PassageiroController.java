@@ -60,6 +60,7 @@ public class PassageiroController {
         }catch (NoSuchElementException e){
             return new ResponseEntity<>("Algum do(s) Id(s) não existe!" , HttpStatus.NOT_FOUND);
         }
+
     }
 
     @GetMapping(value = "/listar/{id}")
