@@ -1,8 +1,10 @@
 package br.com.codewave.codewave.controllers;
 
 import br.com.codewave.codewave.Models.Motorista;
+import br.com.codewave.codewave.Models.Passageiro;
 import br.com.codewave.codewave.services.EmpresaService;
 import br.com.codewave.codewave.services.MotoristaService;
+import br.com.codewave.codewave.services.PassageiroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,9 @@ public class MotoristaController {
 
     @Autowired
     private MotoristaService motoristaService;
+
+    @Autowired
+    private PassageiroService passageiroService;
 
     @Autowired
     private EmpresaService empresaService;
@@ -42,6 +47,22 @@ public class MotoristaController {
         } catch (NoSuchElementException e) {
             return new ResponseEntity("Não foi possivel achar um historico de motoristas!" , HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping(value = "/localizacao")
+    public ResponseEntity localizacao(@RequestParam Integer codigoPassageiro,
+                                      @RequestParam Integer codigoMotorista) {
+
+        Passageiro passageiroAchado = passageiroService.acharPorId(codigoPassageiro);
+        Motorista motoristaAchado = motoristaService.acharPorId(codigoMotorista);
+
+        try{
+            return new ResponseEntity<>( String.format("%.3f", motoristaService.calculoDeProximidade(passageiroAchado.getLatitude(),
+                    passageiroAchado.getLongitude(), motoristaAchado.getLatitude(), motoristaAchado.getLongitude())) + " KM", HttpStatus.OK);
+        }catch (NoSuchElementException e){
+            return new ResponseEntity<>("Algum do(s) Id(s) não existe!" , HttpStatus.NOT_FOUND);
+        }
+
     }
 
     @GetMapping(value = "/listar/{id}")

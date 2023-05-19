@@ -55,7 +55,7 @@ public class PassageiroController {
         Passageiro passageiroAchado = passageiroService.acharPorId(codigoPassageiro);
         Motorista motoristaAchado = motoristaService.acharPorId(codigoMotorista);
         try{
-            return new ResponseEntity<>( String.format("%.4f", passageiroService.calculoDeProximidade(passageiroAchado.getLatitude(),
+            return new ResponseEntity<>( String.format("%.3f", passageiroService.calculoDeProximidade(passageiroAchado.getLatitude(),
                     passageiroAchado.getLongitude(), motoristaAchado.getLatitude(), motoristaAchado.getLongitude())) + " KM", HttpStatus.OK);
         }catch (NoSuchElementException e){
             return new ResponseEntity<>("Algum do(s) Id(s) não existe!" , HttpStatus.NOT_FOUND);
