@@ -1,12 +1,13 @@
 package br.com.codewave.codewave.controllers;
 
 import br.com.codewave.codewave.Models.Corrida;
-import br.com.codewave.codewave.Models.CorridaEnum;
-import br.com.codewave.codewave.Models.Motorista;
-import br.com.codewave.codewave.Models.Passageiro;
+
 import br.com.codewave.codewave.services.CorridaService;
 import br.com.codewave.codewave.services.MotoristaService;
 import br.com.codewave.codewave.services.PassageiroService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +30,14 @@ public class CorridaController {
 
 
     @PostMapping(value = "/nova")
+    @Operation(summary = "Cria uma corrida" , description = "Método que acessa o método adicionar do service e cria uma corrida")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201" ,description = "Created - Corrida criada com sucesso!"),
+            @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
+    })
     public ResponseEntity novaCorrida(@RequestBody Corrida corrida,
-                                      @RequestParam Integer motoristaId,
-                                      @RequestParam Integer passageiroId) {
+                                      @RequestParam(required = false) Integer motoristaId,
+                                      @RequestParam(required = false) Integer passageiroId) {
         corrida.setMotorista(motoristaService.acharPorId(motoristaId));
         corrida.setPassageiro(passageiroService.acharPorId(passageiroId));
 
@@ -45,6 +51,12 @@ public class CorridaController {
     }
 
     @GetMapping(value = "/listartodas")
+    @Operation(summary = "Lista todas as corridas" , description = "Método que acessa o método listarTodos do service e lista todas as corridas")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201" ,description = "OK - Corridas listadas com sucesso!"),
+            @ApiResponse(responseCode = "404" ,description = "Erro - Lista de corridas não localizada!"),
+            @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
+    })
     public ResponseEntity listarTodas() {
         try {
             return new ResponseEntity(corridaService.listarTodos() , HttpStatus.OK);
@@ -54,6 +66,12 @@ public class CorridaController {
     }
 
     @GetMapping(value = "/listar/{id}")
+    @Operation(summary = "Lista uma corrida" , description = "Método que acessa o método acharPorId do service e lista uma corrida")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201" ,description = "OK - Corrida listada com sucesso!"),
+            @ApiResponse(responseCode = "404" ,description = "Erro - Id da corrida não localizado!"),
+            @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
+    })
     public ResponseEntity listarCorrida(@PathVariable Integer id) {
         try {
             return new ResponseEntity(corridaService.acharPorId(id) , HttpStatus.OK);
@@ -63,6 +81,12 @@ public class CorridaController {
     }
 
     @PutMapping(value = "/atualizar/{id}")
+    @Operation(summary = "Atualiza a corrida" , description = "Método que acessa o método atualizar do service e atualiza a corrida")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201" ,description = "OK - Corrida atualizada com sucesso!"),
+            @ApiResponse(responseCode = "404" ,description = "Erro - Id da corrida não localizado!"),
+            @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
+    })
     public ResponseEntity atualizar(@PathVariable Integer id , @RequestBody Corrida corrida) {
         corridaService.atualizar(id, corrida);
         try {
@@ -73,6 +97,12 @@ public class CorridaController {
     }
 
     @DeleteMapping(value = "/deletar/{id}")
+    @Operation(summary = "Remove corrida" , description = "Método que acessa o método remove do service e remove a corrida")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201" ,description = "OK - Corrida removida com sucesso!"),
+            @ApiResponse(responseCode = "404" ,description = "Erro - Id da corrida não localizado!"),
+            @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
+    })
     public ResponseEntity deletar(@PathVariable Integer id) {
         corridaService.remove(id);
         try {

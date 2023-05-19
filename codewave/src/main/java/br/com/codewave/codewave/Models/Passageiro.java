@@ -9,13 +9,10 @@ public class Passageiro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer cpf;
 
     @Column(length = 100)
     private String nome;
-
-    @Column(length = 100)
-    private String cpf;
 
     @Column(length = 100)
     private String email;

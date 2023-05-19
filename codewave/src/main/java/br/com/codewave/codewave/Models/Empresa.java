@@ -9,13 +9,10 @@ public class Empresa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer cnpj;
 
     @Column(length = 255)
     private String carro;
-
-    @Column(length = 50)
-    private String cnpj;
 
     @Column(length = 100)
     private String nome;
