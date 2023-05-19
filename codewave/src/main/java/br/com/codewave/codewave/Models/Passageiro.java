@@ -25,4 +25,9 @@ public class Passageiro {
 
     @ManyToOne
     private Corrida corrida;
+
+    //TESTANDO...
+    private double longitude;
+
+    private double latitude;
 }
