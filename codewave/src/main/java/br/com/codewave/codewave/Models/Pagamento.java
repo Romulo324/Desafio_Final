@@ -13,9 +13,14 @@ public class Pagamento {
     private Integer id;
 
     @Column(precision = 10, scale = 2)
-    private BigDecimal valorBase;
+    private BigDecimal valorMinimo;
 
+    @Column(precision = 10, scale = 2)
+    private BigDecimal valorFinal;
+
+
+    private double porcentagem;
 
     @Column(precision =10, scale = 2)
-    private BigDecimal porcentagem;
+    private BigDecimal resultadoPorcentagem;
 }

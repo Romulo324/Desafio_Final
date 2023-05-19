@@ -5,10 +5,10 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
   datasource:
-    url: jdbc:postgresql://localhost:5432/sprint_7
+    url: jdbc:postgresql://localhost:5432/Desafio_JPA
     username: postgres
-    password: jucaprevost21112004
+    password: Spiderman51
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     show-sql: true
