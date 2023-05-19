@@ -23,7 +23,7 @@ public class MotoristaController {
 
     @PostMapping(value = "/novo")
     public ResponseEntity novoMotorista(@RequestBody Motorista motorista,
-                                        @RequestParam Integer codigo) {
+                                        @RequestParam(required = false) Integer codigo) {
 
         motorista.setEmpresa(empresaService.acharPorId(codigo));
 

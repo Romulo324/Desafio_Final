@@ -1,7 +1,9 @@
 package br.com.codewave.codewave.controllers;
 
+import br.com.codewave.codewave.Models.Motorista;
 import br.com.codewave.codewave.Models.Passageiro;
 import br.com.codewave.codewave.services.CorridaService;
+import br.com.codewave.codewave.services.MotoristaService;
 import br.com.codewave.codewave.services.PassageiroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,12 +20,14 @@ public class PassageiroController {
     private PassageiroService passageiroService;
 
     @Autowired
+    private MotoristaService motoristaService;
+
+    @Autowired
     private CorridaService corridaService;
 
-
-    @PostMapping(value = "/nova")
+    @PostMapping(value = "/novo")
     public ResponseEntity novaCorrida(@RequestBody Passageiro passageiro,
-                                      @RequestParam Integer codigo) {
+                                      @RequestParam(required = false) Integer codigo) {
 
         passageiro.setCorrida(corridaService.acharPorId(codigo));
 
@@ -41,6 +45,20 @@ public class PassageiroController {
             return new ResponseEntity(passageiroService.listarTodos() , HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity("Não foi possivel achar uma historico de passageiros!" , HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping(value = "/localizacao")
+    public ResponseEntity localizacao(@RequestParam Integer codigoPassageiro,
+                              @RequestParam Integer codigoMotorista) {
+
+        Passageiro passageiroAchado = passageiroService.acharPorId(codigoPassageiro);
+        Motorista motoristaAchado = motoristaService.acharPorId(codigoMotorista);
+        try{
+            return new ResponseEntity<>( String.format("%.4f", passageiroService.calculoDeProximidade(passageiroAchado.getLatitude(),
+                    passageiroAchado.getLongitude(), motoristaAchado.getLatitude(), motoristaAchado.getLongitude())) + " KM", HttpStatus.OK);
+        }catch (NoSuchElementException e){
+            return new ResponseEntity<>("Algum do(s) Id(s) não existe!" , HttpStatus.NOT_FOUND);
         }
     }
 

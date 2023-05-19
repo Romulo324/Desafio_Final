@@ -22,9 +22,11 @@ public class Motorista {
     @Column(name = "nome_da_habilitacao", length = 50)
     private String numeroDaHabilitacao;
 
-
     @ManyToOne
     private Empresa empresa;
 
+    //TESTANDO...
+    private double longitude;
 
+    private double latitude;
 }
