@@ -1,14 +1,14 @@
-pring:
+spring:
   profiles:
     active: local
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
   datasource:
-    url: jdbc:postgresql://localhost:5432/Desafiojpa
+    url: jdbc:postgresql://localhost:5432/sprint_7
     username: postgres
-    password: romulo324
+    password: jucaprevost21112004
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     show-sql: true
