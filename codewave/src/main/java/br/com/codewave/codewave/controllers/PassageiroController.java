@@ -6,10 +6,12 @@ import br.com.codewave.codewave.services.PassageiroService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.NoSuchElementException;
 
@@ -30,7 +32,7 @@ public class PassageiroController {
             @ApiResponse(responseCode = "201" ,description = "Created - Passageiro criado com sucesso!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
-    public ResponseEntity novaCorrida(@RequestBody Passageiro passageiro,
+    public ResponseEntity novoPassageiro(@Valid @RequestBody Passageiro passageiro,
                                       @RequestParam(required = false) Integer corridaId) {
 
         passageiro.setCorrida(corridaService.acharPorId(corridaId));

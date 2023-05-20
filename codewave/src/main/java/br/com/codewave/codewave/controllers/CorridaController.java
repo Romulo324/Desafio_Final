@@ -77,6 +77,8 @@ public class CorridaController {
             return new ResponseEntity(corridaService.acharPorId(id) , HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity("Esse id não existe!" , HttpStatus.NOT_FOUND);
+        }catch (NullPointerException e) {
+            return new ResponseEntity("" , HttpStatus.BAD_REQUEST);
         }
     }
 
