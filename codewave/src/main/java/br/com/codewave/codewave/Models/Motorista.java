@@ -23,5 +23,8 @@ public class Motorista {
     @ManyToOne
     private Empresa empresa;
 
+    //TESTANDO...
+    private double longitude;
 
+    private double latitude;
 }

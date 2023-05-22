@@ -26,4 +26,9 @@ public class Passageiro {
     private String aceitarCorrida;
     @ManyToOne
     private Corrida corrida;
+
+    //TESTANDO...
+    private double longitude;
+
+    private double latitude;
 }

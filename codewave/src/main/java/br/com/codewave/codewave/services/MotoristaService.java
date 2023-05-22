@@ -1,6 +1,5 @@
 package br.com.codewave.codewave.services;
 
-
 import br.com.codewave.codewave.Models.Motorista;
 import br.com.codewave.codewave.repositories.MotoristaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+import static br.com.codewave.codewave.util.Localizacao.haversine;
 
 @Service
 public class MotoristaService {
@@ -41,5 +42,12 @@ public class MotoristaService {
         if (motoristaRepository.existsById(id)){
             motoristaRepository.deleteById(id);
         }
+    }
+
+    public double calculoDeProximidade(double latitudePassageiro, double longitudePassageiro,
+                                       double latidudeMotorista, double longitudeMotorista){
+
+        return haversine(latitudePassageiro, longitudePassageiro,
+                latidudeMotorista, longitudeMotorista);
     }
 }
