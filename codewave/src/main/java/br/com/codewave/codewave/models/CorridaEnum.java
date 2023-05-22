@@ -1,4 +1,4 @@
-package br.com.codewave.codewave.models;
+package br.com.codewave.codewave.Models;
 
 public enum CorridaEnum {
     FINALIZADO, EM_ANDAMENTO, PENDENTE
