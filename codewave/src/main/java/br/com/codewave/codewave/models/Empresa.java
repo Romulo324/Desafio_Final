@@ -1,4 +1,4 @@
-package br.com.codewave.codewave.models;
+package br.com.codewave.codewave.Models;
 
 import jakarta.persistence.*;
 import lombok.Data;
