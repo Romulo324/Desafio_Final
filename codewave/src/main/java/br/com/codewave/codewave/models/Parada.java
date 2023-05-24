@@ -11,7 +11,10 @@ public class Parada {
 
     @Id
     private Integer id;
+
+
     private String localDaParada;
+
     @ManyToOne
     private Corrida corrida;
 }

@@ -7,6 +7,7 @@ import lombok.Data;
 @Entity(name = "tb_motorista")
 public class Motorista {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer cpf;
@@ -22,4 +23,8 @@ public class Motorista {
     @ManyToOne
     private Empresa empresa;
 
+    //TESTANDO...
+    private double longitude;
+
+    private double latitude;
 }

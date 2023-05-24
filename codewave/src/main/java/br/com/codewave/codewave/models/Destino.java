@@ -15,7 +15,7 @@ public class Destino {
     private String local;
 
     @Column(length = 255, name = "ponto_de_partida")
-    private String pontoDePartido;
+    private String pontoDePartida;
 
     @Column(length = 255, name = "ponto_de_chegada")
     private String pontoDeChegada;

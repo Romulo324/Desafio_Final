@@ -10,6 +10,7 @@ public class Empresa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer cnpj;
+
     @Column(length = 255)
     private String carro;
 
