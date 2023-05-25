@@ -27,4 +27,14 @@ public class Motorista {
     private double longitude;
 
     private double latitude;
+
+    @Column(nullable = true, length = 64)
+    private String photo;
+
+    @Transient
+    public String getPhotosImagePath(){
+        if (photo == null || cpf == null) return null;
+
+        return "motorista-photo/" + cpf + "/" + photo;
+    }
 }
