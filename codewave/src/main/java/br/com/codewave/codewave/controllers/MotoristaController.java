@@ -4,7 +4,9 @@ import br.com.codewave.codewave.Models.Corrida;
 import br.com.codewave.codewave.Models.Motorista;
 import br.com.codewave.codewave.Models.Pagamento;
 import br.com.codewave.codewave.Models.Passageiro;
+import br.com.codewave.codewave.repositories.MotoristaRepository;
 import br.com.codewave.codewave.services.*;
+import br.com.codewave.codewave.util.FileUpLoadUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -12,8 +14,11 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -34,6 +39,9 @@ public class MotoristaController {
 
     @Autowired
     private PagamentoService pagamentoService;
+
+    @Autowired
+    private MotoristaRepository motoristaRepository;
 
 
     @PostMapping(value = "/novo")
@@ -166,5 +174,24 @@ public class MotoristaController {
             return new ResponseEntity("Esse id não existe!" , HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity("Corrida " + cpf + " finalizada!" , HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/photo/{cpf}")
+    public ResponseEntity salvarPhotoMotorista(Motorista motorista, @RequestParam("image")
+    MultipartFile multipartFile) throws IOException {
+        try {
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            motorista.setPhoto(fileName);
+
+            Motorista photoMotorista = motoristaRepository.save(motorista);
+
+            String upLoaDir = "motorista-photos/" + photoMotorista.getCpf();
+
+            FileUpLoadUtil.saveFile(upLoaDir, fileName, multipartFile);
+            return new ResponseEntity("Sua Avaliação Foi Cadastrada Com SUcesso", HttpStatus.OK);
+        }catch (IOException e){
+            return new ResponseEntity("Sua Avaliação não foi Cadastrada 😦 Tente novamente mais tarde",
+                    HttpStatus.BAD_REQUEST);
+        }
     }
 }
