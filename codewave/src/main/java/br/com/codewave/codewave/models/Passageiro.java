@@ -11,6 +11,9 @@ public class Passageiro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer cpf;
 
+    @Column(length = 10)
+    private String senha;
+
     @Column(length = 100)
     private String nome;
 
@@ -20,8 +23,8 @@ public class Passageiro {
     @Column(length = 25, name = "numero_de_telefone")
     private String numeroDeTelefone;
 
-    private String cancelarCorrida;
-    private String aceitarCorrida;
+    private String longitude;
+    private String latitude;
 
     @ManyToOne
     private Corrida corrida;

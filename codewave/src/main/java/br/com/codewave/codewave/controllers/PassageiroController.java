@@ -10,6 +10,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -18,6 +21,9 @@ import java.util.NoSuchElementException;
 @RestController
 @RequestMapping(value = "/passageiro")
 public class PassageiroController {
+
+    @Autowired
+    private JavaMailSender enviar;
 
     @Autowired
     private PassageiroService passageiroService;
@@ -88,6 +94,33 @@ public class PassageiroController {
             return new ResponseEntity("Passageiro atualizado com sucesso!" , HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity("Esse id não existe!" , HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/enviar-senha/{email}")
+    @ResponseBody
+    public String enviarSenha(@PathVariable String email) {
+        Passageiro passageiro = passageiroService.buscarPorEmail(email);
+
+        if (passageiro == null) {
+            return "E-mail não encontrado";
+
+        }
+
+        String novaSenha = passageiroService.gerarNovaSenha();
+        passageiro.setSenha(novaSenha);
+        passageiroService.adicionar(passageiro);
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(passageiro.getEmail());
+        message.setSubject("Nova senha");
+        message.setText("Sua nova senha de acesso é: " + novaSenha);
+
+        try {
+            enviar.send(message);
+            return "Nova e-mail envia sucesso";
+        } catch (MailException e) {
+            return "Erro - e-mail não envia";
         }
     }
 

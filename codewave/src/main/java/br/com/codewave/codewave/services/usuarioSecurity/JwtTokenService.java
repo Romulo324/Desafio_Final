@@ -15,7 +15,7 @@ import java.util.function.Function;
 
 @Service
 public class JwtTokenService{
-    public static final long TEMPO_VALIDADE_TOKEN = 1000 * 5 * 60 * 60; // 5 Horas
+    public static final long TEMPO_VALIDADE_TOKEN = 1000 * 5 * 60 * 60; //5 Horas de duração
 
     private String secret = "34753778214125442A462D4A614E645267556B58703273357638792F423F4528";
 

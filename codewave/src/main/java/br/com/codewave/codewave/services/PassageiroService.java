@@ -51,4 +51,19 @@ public class PassageiroService {
         return haversine(latitudePassageiro, longitudePassageiro,
                 latidudeMotorista, longitudeMotorista);
     }
+
+    public Passageiro buscarPorEmail(String email) {
+        return passageiroRepository.findByEmail(email);
+    }
+    public String gerarNovaSenha() {
+        int length = 12;
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder newPassword = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            int randomIndex = (int) (Math.random() * characters.length());
+            newPassword.append(characters.charAt(randomIndex));
+        }
+
+        return newPassword.toString();
+    }
 }

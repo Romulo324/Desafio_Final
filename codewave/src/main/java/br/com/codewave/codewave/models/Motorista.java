@@ -22,4 +22,7 @@ public class Motorista {
     @ManyToOne
     private Empresa empresa;
 
+    private String longitude;
+    private String latitude;
+
 }
