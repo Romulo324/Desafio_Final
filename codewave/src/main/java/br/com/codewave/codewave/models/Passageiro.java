@@ -22,6 +22,7 @@ public class Passageiro {
 
     private String cancelarCorrida;
     private String aceitarCorrida;
+
     @ManyToOne
     private Corrida corrida;
 }

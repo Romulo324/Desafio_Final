@@ -1,8 +1,6 @@
 package br.com.codewave.codewave.util;
 
 public class Localizacao {
-
-
     // Java program for the haversine formula
     public static double haversine(double lat1, double lon1,
                             double lat2, double lon2)
