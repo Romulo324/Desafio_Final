@@ -45,14 +45,14 @@ public class CorridaService {
         }
     }
 
-    public void aceitarCorrida(Corrida corrida, Integer id) {
-        corrida.setMotorista(motoristaService.acharPorId(id));
+    public void aceitarCorrida(Corrida corrida, String cpf) {
+        corrida.setMotorista(motoristaService.acharPorId(cpf));
         corrida.setStatus(CorridaEnum.EM_ANDAMENTO);
         corridaRepository.save(corrida);
     }
 
-    public void finalizarCorrida(Corrida corrida, Integer id) {
-        corrida.setMotorista(motoristaService.acharPorId(id));
+    public void finalizarCorrida(Corrida corrida, String cpf) {
+        corrida.setMotorista(motoristaService.acharPorId(cpf));
         corrida.setStatus(CorridaEnum.FINALIZADO);
         corridaRepository.save(corrida);
     }

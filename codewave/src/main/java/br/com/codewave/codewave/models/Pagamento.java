@@ -18,12 +18,12 @@ public class Pagamento {
     @Column(precision =10, scale = 2)
     private BigDecimal valorFinal;
 
-    private double porcentagem;
-
-    @Column(precision = 10, scale = 2)
-    private BigDecimal resultadoPorcentagem;
+    private double porcentagemDoMotorista;
 
     @Column(precision = 10, scale = 2)
     private BigDecimal valorBase;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal resultadoPorcentagemDoMotorista;
 
 }

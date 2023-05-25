@@ -21,24 +21,24 @@ public class EmpresaService {
         return empresaRepository.findAll();
     }
 
-    public Empresa acharPorId(Integer id) {
-        Optional<Empresa> optionalDestino = empresaRepository.findById(id);
+    public Empresa acharPorId(String cnpj) {
+        Optional<Empresa> optionalDestino = empresaRepository.findByCnpj(cnpj);
         if (optionalDestino.isEmpty()){
             throw new RuntimeException("Empresa Não Encontrada");
         }
         return optionalDestino.get();
     }
 
-    public void atualizar(Integer id, Empresa empresa){
-        if (empresaRepository.existsById(id)){
+    public void atualizar(String cnpj, Empresa empresa){
+        if (empresaRepository.existsById((cnpj))){
             empresaRepository.save(empresa);
         }
     }
 
-    public void remove(Integer id) {
-        Empresa pesquisarEmpresa = acharPorId(id);
-        if (empresaRepository.existsById(id)){
-            empresaRepository.deleteById(id);
+    public void remove(String cnpj) {
+        Empresa pesquisarEmpresa = acharPorId(cnpj);
+        if (empresaRepository.existsById((cnpj))){
+            empresaRepository.deleteById((cnpj));
         }
     }
 }

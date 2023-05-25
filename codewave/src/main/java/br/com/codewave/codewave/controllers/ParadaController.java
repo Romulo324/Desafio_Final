@@ -32,7 +32,7 @@ public class ParadaController {
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
     public ResponseEntity adicionaParada(@RequestBody Parada parada,
-                                         @RequestParam(required = false) Integer corridaId) {
+                                         @RequestParam Integer corridaId) {
 
         parada.setCorrida(corridaService.acharPorId(corridaId));
 

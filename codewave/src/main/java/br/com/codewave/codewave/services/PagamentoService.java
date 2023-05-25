@@ -16,8 +16,8 @@ public class PagamentoService {
     public PagamentoRepository pagamentoRepository;
 
     public void adicionar(Pagamento pagamentoQueSeraSalvo) {
-        double resultado = pagamentoQueSeraSalvo.getValorFinal().doubleValue() * pagamentoQueSeraSalvo.getPorcentagem() / 100;
-        pagamentoQueSeraSalvo.setResultadoPorcentagem(BigDecimal.valueOf(resultado).setScale(2, RoundingMode.HALF_UP));
+        double resultado = pagamentoQueSeraSalvo.getValorFinal().doubleValue() * pagamentoQueSeraSalvo.getPorcentagemDoMotorista() / 100;
+        pagamentoQueSeraSalvo.setResultadoPorcentagemDoMotorista(BigDecimal.valueOf(resultado).setScale(2, RoundingMode.HALF_UP));
         pagamentoRepository.save(pagamentoQueSeraSalvo);
     }
 

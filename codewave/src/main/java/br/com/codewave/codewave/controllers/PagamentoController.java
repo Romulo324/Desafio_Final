@@ -21,7 +21,7 @@ public class PagamentoController {
     private PagamentoService pagamentoService;
 
 
-    @PostMapping(value = "/nova")
+    @PostMapping(value = "/novo")
     @Operation(summary = "Cria um pagamento" , description = "Método que acessa o método adicionar do service e cria o pagamento")
     @ApiResponses({
             @ApiResponse(responseCode = "201" ,description = "Created - Pagamento criado com sucesso!"),
@@ -36,7 +36,7 @@ public class PagamentoController {
         return new ResponseEntity("Pagamento cadastrada com sucesso" , HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/listartodas")
+    @GetMapping(value = "/listartodos")
     @Operation(summary = "Lista todos os pagamentos" , description = "Método que acessa o método listarTodos do service e lista todos os pagamentos")
     @ApiResponses({
             @ApiResponse(responseCode = "201" ,description = "OK - Pagamentos listados com sucesso!"),
@@ -83,12 +83,6 @@ public class PagamentoController {
     }
 
     @DeleteMapping(value = "/deletar/{id}")
-    @Operation(summary = "Remove pagamento" , description = "Método que acessa o método remove do service e remove o pagamento")
-    @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Pagamento removido com sucesso!"),
-            @ApiResponse(responseCode = "404" ,description = "Erro - Id do pagamento não localizado!"),
-            @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
-    })
     public ResponseEntity deletar(@PathVariable Integer id) {
         pagamentoService.remove(id);
         try {

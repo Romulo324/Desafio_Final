@@ -10,31 +10,28 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/avaliacao")
 public class AvaliacaoController {
+
     @Autowired
     private AvaliacaoService avaliacaoService;
 
-    @PostMapping(value = "/novas")
-    public ResponseEntity minhasAvaliacoes(@RequestBody Avaliacao avaliacao) {
+    @PostMapping(value = "/add")
+    public ResponseEntity addAvaliacao(@RequestBody Avaliacao avaliacao) {
         avaliacaoService.adicionar(avaliacao);
         return new ResponseEntity(avaliacao, HttpStatus.CREATED);
     }
-
-    @GetMapping
-    public ResponseEntity ListarTodos() {
-        return new ResponseEntity(avaliacaoService.listarTodos(), HttpStatus.OK);
-
+    @GetMapping(value = "/listar")
+    public ResponseEntity listarPorMotorista(@RequestBody Avaliacao avaliacao){
+        avaliacaoService.listar(avaliacao);
+        return  new ResponseEntity(avaliacao, HttpStatus.OK);
     }
-    @GetMapping(value = "/{id}")
-    public ResponseEntity ListarporAvaliacao(@PathVariable Integer id) {
-        return new ResponseEntity(avaliacaoService.acharPorId(id), HttpStatus.OK);
-
-    }
-    @PutMapping(value = "/tarefas/{titulo}")
-    public ResponseEntity Alterar(@PathVariable Integer id, @RequestBody Avaliacao avaliacao) {
-        avaliacaoService.atualizar(id, avaliacao);
+    @PutMapping(value = "/atualizar")
+    public ResponseEntity atualizarAvaliacao(@RequestBody Avaliacao avaliacao){
+        avaliacaoService.atualizar(avaliacao);
         return new ResponseEntity(avaliacao, HttpStatus.OK);
     }
-
-
-
+    @DeleteMapping(value = "/deletar")
+    public ResponseEntity deletarAvaliacao(@RequestBody Avaliacao avaliacao){
+        avaliacaoService.deletar(avaliacao);
+        return new ResponseEntity(avaliacao, HttpStatus.OK);
+    }
 }

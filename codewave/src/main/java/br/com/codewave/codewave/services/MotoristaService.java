@@ -23,24 +23,24 @@ public class MotoristaService {
         return motoristaRepository.findAll();
     }
 
-    public Motorista acharPorId(Integer id) {
-        Optional<Motorista> optionalDestino = motoristaRepository.findById(id);
+    public Motorista acharPorId(String cpf) {
+        Optional<Motorista> optionalDestino = motoristaRepository.findByCpf(cpf);
         if (optionalDestino.isEmpty()){
             throw new RuntimeException("Motorista Não Encontrado");
         }
         return optionalDestino.get();
     }
 
-    public void atualizar(Integer id, Motorista motorista){
-        if (motoristaRepository.existsById(id)){
+    public void atualizar(String cpf, Motorista motorista){
+        if (motoristaRepository.existsById((cpf))){
             motoristaRepository.save(motorista);
         }
     }
 
-    public void remove(Integer id) {
-        Motorista pesquisarMotorista = acharPorId(id);
-        if (motoristaRepository.existsById(id)){
-            motoristaRepository.deleteById(id);
+    public void remove(String cpf) {
+        Motorista pesquisarMotorista = acharPorId(cpf);
+        if (motoristaRepository.existsById((cpf))){
+            motoristaRepository.deleteById((cpf));
         }
     }
 

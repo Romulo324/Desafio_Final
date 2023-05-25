@@ -1,6 +1,7 @@
 package br.com.codewave.codewave.services;
 
 import br.com.codewave.codewave.Models.Avaliacao;
+import br.com.codewave.codewave.Models.AvaliacaoEnum;
 import br.com.codewave.codewave.Models.Destino;
 import br.com.codewave.codewave.repositories.AvaliacaoRepository;
 import br.com.codewave.codewave.repositories.DestinoRepository;
@@ -15,29 +16,120 @@ public class AvaliacaoService {
     @Autowired
     public AvaliacaoRepository avaliacaoRepository;
 
-    public void adicionar(Avaliacao salvarAvaliacao) {
-        avaliacaoRepository.save(salvarAvaliacao);
-    }
+    public void adicionar(Avaliacao avaliacao) {
+        Avaliacao model = new Avaliacao();
+        switch (avaliacao.getAvaliacao()){
+            case PÉSSIMO:
+                model.setAvaliacao(AvaliacaoEnum.PÉSSIMO);
 
-    public List<Avaliacao> listarTodos() {
-        return avaliacaoRepository.findAll();
-    }
+                break;
 
-    public Avaliacao acharPorId(Integer id) {
-        Optional<Avaliacao> optionalAvaliacao = avaliacaoRepository.findById(id);
-        return optionalAvaliacao.get();
-    }
+            case RUIM:
+                model.setAvaliacao(AvaliacaoEnum.RUIM);
+                break;
 
-    public void atualizar(Integer id, Avaliacao avaliacao){
-        if (avaliacaoRepository.existsById(id)){
-            avaliacaoRepository.save(avaliacao);
+            case BOM:
+                model.setAvaliacao(AvaliacaoEnum.BOM);
+                break;
+
+            case MUITO_BOM:
+                model.setAvaliacao(AvaliacaoEnum.MUITO_BOM);
+                break;
+
+            case ÓTIMO:
+                model.setAvaliacao(AvaliacaoEnum.ÓTIMO);
+                break;
+
         }
+
+        avaliacaoRepository.save(model);
     }
 
-    public void remove(Integer id) {
-        Avaliacao pesquisarAvaliacao = acharPorId(id);
-        if (avaliacaoRepository.existsById(id)){
-            avaliacaoRepository.deleteById(id);
+    public void listar(Avaliacao avaliacao) {
+        Avaliacao model = new Avaliacao();
+        switch (avaliacao.getAvaliacao()){
+            case PÉSSIMO:
+                model.setAvaliacao(AvaliacaoEnum.PÉSSIMO);
+
+                break;
+
+            case RUIM:
+                model.setAvaliacao(AvaliacaoEnum.RUIM);
+                break;
+
+            case BOM:
+                model.setAvaliacao(AvaliacaoEnum.BOM);
+                break;
+
+            case MUITO_BOM:
+                model.setAvaliacao(AvaliacaoEnum.MUITO_BOM);
+                break;
+
+            case ÓTIMO:
+                model.setAvaliacao(AvaliacaoEnum.ÓTIMO);
+                break;
+
         }
+
+        avaliacaoRepository.save(model);
     }
+
+    public void deletar(Avaliacao avaliacao) {
+        Avaliacao model = new Avaliacao();
+        switch (avaliacao.getAvaliacao()){
+            case PÉSSIMO:
+                model.setAvaliacao(AvaliacaoEnum.PÉSSIMO);
+
+                break;
+
+            case RUIM:
+                model.setAvaliacao(AvaliacaoEnum.RUIM);
+                break;
+
+            case BOM:
+                model.setAvaliacao(AvaliacaoEnum.BOM);
+                break;
+
+            case MUITO_BOM:
+                model.setAvaliacao(AvaliacaoEnum.MUITO_BOM);
+                break;
+
+            case ÓTIMO:
+                model.setAvaliacao(AvaliacaoEnum.ÓTIMO);
+                break;
+
+        }
+
+        avaliacaoRepository.save(model);
+    }
+
+    public void atualizar(Avaliacao avaliacao) {
+        Avaliacao model = new Avaliacao();
+        switch (avaliacao.getAvaliacao()){
+            case PÉSSIMO:
+                model.setAvaliacao(AvaliacaoEnum.PÉSSIMO);
+
+                break;
+
+            case RUIM:
+                model.setAvaliacao(AvaliacaoEnum.RUIM);
+                break;
+
+            case BOM:
+                model.setAvaliacao(AvaliacaoEnum.BOM);
+                break;
+
+            case MUITO_BOM:
+                model.setAvaliacao(AvaliacaoEnum.MUITO_BOM);
+                break;
+
+            case ÓTIMO:
+                model.setAvaliacao(AvaliacaoEnum.ÓTIMO);
+                break;
+
+        }
+
+        avaliacaoRepository.save(model);
+    }
+
 }

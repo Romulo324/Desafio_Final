@@ -2,12 +2,13 @@ package br.com.codewave.codewave.controllers;
 
 import br.com.codewave.codewave.Models.Corrida;
 import br.com.codewave.codewave.Models.Motorista;
-import br.com.codewave.codewave.services.CorridaService;
-import br.com.codewave.codewave.services.EmpresaService;
-import br.com.codewave.codewave.services.MotoristaService;
+import br.com.codewave.codewave.Models.Pagamento;
+import br.com.codewave.codewave.Models.Passageiro;
+import br.com.codewave.codewave.services.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,12 @@ public class MotoristaController {
     @Autowired
     private CorridaService corridaService;
 
+    @Autowired
+    private PassageiroService passageiroService;
+
+    @Autowired
+    private PagamentoService pagamentoService;
+
 
     @PostMapping(value = "/novo")
     @Operation(summary = "Cria um motorista" , description = "Método que acessa o método adicionar do service e cria o motorista")
@@ -35,11 +42,10 @@ public class MotoristaController {
             @ApiResponse(responseCode = "201" ,description = "Created - Pagamento criado com sucesso!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
-    public ResponseEntity novoMotorista(@RequestBody Motorista motorista,
-                                        @RequestParam(required = false) Integer empresaId) {
+    public ResponseEntity novoMotorista(@Valid @RequestBody Motorista motorista,
+                                        @RequestParam String cnpj) {
 
-        motorista.setEmpresa(empresaService.acharPorId(empresaId));
-
+        motorista.setEmpresa(empresaService.acharPorId(cnpj));
         try {
             motoristaService.adicionar(motorista);
         }catch (NoSuchElementException e) {
@@ -62,83 +68,103 @@ public class MotoristaController {
             return new ResponseEntity("Não foi possivel achar um historico de motoristas!" , HttpStatus.NOT_FOUND);
         }
     }
+    @GetMapping(value = "/localizacao")
+    public ResponseEntity localizacao(@RequestParam String cpfPassageiro,
+                                      @RequestParam String cpfMotorista) {
 
-    @GetMapping(value = "/listar/{id}")
+        Passageiro passageiroAchado = passageiroService.acharPorId(cpfPassageiro);
+        Motorista motoristaAchado = motoristaService.acharPorId(cpfMotorista);
+
+        try{
+            return new ResponseEntity<>( String.format("%.3f", motoristaService.calculoDeProximidade(passageiroAchado.getLatitude(),
+                    passageiroAchado.getLongitude(), motoristaAchado.getLatitude(), motoristaAchado.getLongitude())) + " KM", HttpStatus.OK);
+        }catch (NoSuchElementException e){
+            return new ResponseEntity<>("Algum do(s) Id(s) não existe!" , HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+    @GetMapping(value = "/listar/{cpf}")
     @Operation(summary = "Lista um motorista" , description = "Método que acessa o método acharPorId do service e lista um motorista")
     @ApiResponses({
             @ApiResponse(responseCode = "201" ,description = "OK - Motorista listado com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - CPF do motorista não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
-    public ResponseEntity listarCorrida(@PathVariable Integer id) {
+    public ResponseEntity listarCorrida(@PathVariable String cpf) {
         try {
-            return new ResponseEntity(motoristaService.acharPorId(id) , HttpStatus.OK);
+            return new ResponseEntity(motoristaService.acharPorId(cpf) , HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity("Esse CPF não existe!" , HttpStatus.NOT_FOUND);
         }
     }
 
-    @PutMapping(value = "/atualizar/{id}")
+    @PutMapping(value = "/atualizar/{cpf}")
     @Operation(summary = "Atualiza o motorista" , description = "Método que acessa o método atualizar do service e atualiza o motorista")
     @ApiResponses({
             @ApiResponse(responseCode = "201" ,description = "OK - Motorista atualizado com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - CPF do motorista não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
-    public ResponseEntity atualizar(@PathVariable Integer id , @RequestBody Motorista motorista) {
-        motoristaService.atualizar(id, motorista);
+    public ResponseEntity atualizar(@PathVariable String cpf , @RequestBody Motorista motorista) {
+        motoristaService.atualizar(cpf, motorista);
         try {
-            return new ResponseEntity("Motorista " + id + "atualizado com sucesso!" , HttpStatus.OK);
+            return new ResponseEntity("Motorista " + cpf + "atualizado com sucesso!" , HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity("Esse CPF não existe!" , HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping(value = "/deletar/{id}")
+    @DeleteMapping(value = "/deletar/{cpf}")
     @Operation(summary = "Remove motorista" , description = "Método que acessa o método remove do service e remove o motorista")
     @ApiResponses({
             @ApiResponse(responseCode = "201" ,description = "OK - Motorista removido com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - CPF do motorista não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
-    public ResponseEntity deletar(@PathVariable Integer id) {
-        motoristaService.remove(id);
+    public ResponseEntity deletar(@PathVariable String cpf) {
+        motoristaService.remove(cpf);
         try {
-            return new ResponseEntity("Motorista " + id + " deletado!" , HttpStatus.OK);
+            return new ResponseEntity("Motorista " + cpf + " deletado!" , HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity("Esse CPF não existe!" , HttpStatus.NOT_FOUND);
         }
     }
 
-    @PutMapping(value = "/aceitar")
+    @PutMapping(value = "/aceitar/{cpf}")
     @Operation(summary = "Aceita corrida" , description = "Método que acessa o método aceitarCorrida do service e aceita a corrida")
     @ApiResponses({
             @ApiResponse(responseCode = "201" ,description = "OK - Corrida aceita!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Id da corrida não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
-    public ResponseEntity aceitarCorrida(@PathVariable Integer id , @RequestBody Corrida corrida) {
+    public ResponseEntity aceitarCorrida(@PathVariable String cpf , @RequestBody Pagamento pagamento,
+                                         @RequestParam Integer corridaId) {
+        pagamentoService.adicionar(pagamento);
+        Corrida corrida = corridaService.acharPorId(corridaId);
+        corrida.setPagamento(pagamento);
+
         try {
-            corridaService.aceitarCorrida(corrida, id);
+            corridaService.aceitarCorrida(corrida, cpf);
         } catch (NoSuchElementException e) {
             return new ResponseEntity("Esse id não existe!" , HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity("Corrida " + id + " aceita!" , HttpStatus.OK);
+        return new ResponseEntity("Corrida " + cpf + " aceita!" , HttpStatus.OK);
     }
 
-    @PutMapping(value = "/finalizar")
+    @PutMapping(value = "/finalizar/{cpf}")
     @Operation(summary = "Finaliza corrida" , description = "Método que acessa o método finalizarCorrida do service e finaliza a corrida")
     @ApiResponses({
             @ApiResponse(responseCode = "201" ,description = "OK - Corrida finalizada!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Id da corrida não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
-    public ResponseEntity finalizarCorrida(@PathVariable Integer id , @RequestBody Corrida corrida) {
+    public ResponseEntity finalizarCorrida(@PathVariable String cpf , @RequestBody Corrida corrida) {
         try {
-            corridaService.finalizarCorrida(corrida, id);
+            corridaService.finalizarCorrida(corrida, cpf);
         } catch (NoSuchElementException e) {
             return new ResponseEntity("Esse id não existe!" , HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity("Corrida " + id + " finalizada!" , HttpStatus.OK);
+        return new ResponseEntity("Corrida " + cpf + " finalizada!" , HttpStatus.OK);
     }
 }

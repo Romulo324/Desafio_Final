@@ -24,24 +24,24 @@ public class PassageiroService {
         return passageiroRepository.findAll();
     }
 
-    public Passageiro acharPorId(Integer id) {
-        Optional<Passageiro> optionalDestino = passageiroRepository.findById(id);
+    public Passageiro acharPorId(String cpf) {
+        Optional<Passageiro> optionalDestino = passageiroRepository.findByCpf(cpf);
         if (optionalDestino.isEmpty()){
             throw new RuntimeException("Passageiro Não Encontrado");
         }
         return optionalDestino.get();
     }
 
-    public void atualizar(Integer id, Passageiro passageiro){
-        if (passageiroRepository.existsById(id)){
+    public void atualizar(String cpf, Passageiro passageiro){
+        if (passageiroRepository.existsById(cpf)){
             passageiroRepository.save(passageiro);
         }
     }
 
-    public void remove(Integer id) {
-        Passageiro pesquisarDestino = acharPorId(id);
-        if (passageiroRepository.existsById(id)){
-            passageiroRepository.deleteById(id);
+    public void remove(String cpf) {
+        Passageiro pesquisarDestino = acharPorId(cpf);
+        if (passageiroRepository.existsById((cpf))){
+            passageiroRepository.deleteById((cpf));
         }
     }
 

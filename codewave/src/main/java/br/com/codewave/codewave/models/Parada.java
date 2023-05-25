@@ -1,8 +1,6 @@
 package br.com.codewave.codewave.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -10,6 +8,7 @@ import lombok.Data;
 public class Parada {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String localDaParada;
     @ManyToOne

@@ -1,7 +1,9 @@
 package br.com.codewave.codewave.controllers;
 
+import br.com.codewave.codewave.Models.Motorista;
 import br.com.codewave.codewave.Models.Passageiro;
 import br.com.codewave.codewave.services.CorridaService;
+import br.com.codewave.codewave.services.MotoristaService;
 import br.com.codewave.codewave.services.PassageiroService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -25,17 +27,18 @@ public class PassageiroController {
     @Autowired
     private CorridaService corridaService;
 
+    @Autowired
+    private MotoristaService motoristaService;
 
-    @PostMapping(value = "/nova")
+
+
+    @PostMapping(value = "/novo")
     @Operation(summary = "Cria um passageiro" , description = "Método que acessa o método adicionar do service e cria passageiro")
     @ApiResponses({
             @ApiResponse(responseCode = "201" ,description = "Created - Passageiro criado com sucesso!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
-    public ResponseEntity novoPassageiro(@Valid @RequestBody Passageiro passageiro,
-                                      @RequestParam(required = false) Integer corridaId) {
-
-        passageiro.setCorrida(corridaService.acharPorId(corridaId));
+    public ResponseEntity novoPassageiro(@Valid @RequestBody Passageiro passageiro) {
 
         try {
             passageiroService.adicionar(passageiro);
@@ -59,31 +62,44 @@ public class PassageiroController {
             return new ResponseEntity("Não foi possivel achar uma historico de passageiros!" , HttpStatus.NOT_FOUND);
         }
     }
+    @GetMapping(value = "/localizacao")
+    public ResponseEntity localizacao(@RequestParam String cpfPassageiro,
+                                      @RequestParam String cpfMotorista) {
 
-    @GetMapping(value = "/listar/{id}")
+        Passageiro passageiroAchado = passageiroService.acharPorId(cpfPassageiro);
+        Motorista motoristaAchado = motoristaService.acharPorId(cpfMotorista);
+        try{
+            return new ResponseEntity<>( String.format("%.3f", passageiroService.calculoDeProximidade(passageiroAchado.getLatitude(),
+                    passageiroAchado.getLongitude(), motoristaAchado.getLatitude(), motoristaAchado.getLongitude())) + " KM", HttpStatus.OK);
+        }catch (NoSuchElementException e){
+            return new ResponseEntity<>("Algum do(s) Id(s) não existe!" , HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping(value = "/listar/{cpf}")
     @Operation(summary = "Lista um passageiro" , description = "Método que acessa o método acharPorId do service e lista um passageiro")
     @ApiResponses({
             @ApiResponse(responseCode = "201" ,description = "OK - Passageiro listado com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - CPF do passageiro não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
-    public ResponseEntity listarCorrida(@PathVariable Integer id) {
+    public ResponseEntity listarCorrida(@PathVariable String cpf) {
         try {
-            return new ResponseEntity(passageiroService.acharPorId(id) , HttpStatus.OK);
+            return new ResponseEntity(passageiroService.acharPorId(cpf) , HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity("Esse id não existe!" , HttpStatus.NOT_FOUND);
         }
     }
 
-    @PutMapping(value = "/atualizar/{id}")
+    @PutMapping(value = "/atualizar/{cpf}")
     @Operation(summary = "Atualiza passageiro" , description = "Método que acessa o método atualizar do service e atualiza o passageiro")
     @ApiResponses({
             @ApiResponse(responseCode = "201" ,description = "OK - Passageiro atualizado com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - CPF do passageiro não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
-    public ResponseEntity atualizar(@PathVariable Integer id , @RequestBody Passageiro passageiro) {
-        passageiroService.atualizar(id, passageiro);
+    public ResponseEntity atualizar(@PathVariable String cpf , @RequestBody Passageiro passageiro) {
+        passageiroService.atualizar(cpf, passageiro);
         try {
             return new ResponseEntity("Passageiro atualizado com sucesso!" , HttpStatus.OK);
         } catch (NoSuchElementException e) {
@@ -91,17 +107,17 @@ public class PassageiroController {
         }
     }
 
-    @DeleteMapping(value = "/deletar/{id}")
+    @DeleteMapping(value = "/deletar/{cpf}")
     @Operation(summary = "Remove passageiro" , description = "Método que acessa o método remove do service e remove o passageiro")
     @ApiResponses({
             @ApiResponse(responseCode = "201" ,description = "OK - Passageiro removido com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - CPF do passageiro não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
-    public ResponseEntity deletar(@PathVariable Integer id) {
-        passageiroService.remove(id);
+    public ResponseEntity deletar(@PathVariable String cpf) {
+        passageiroService.remove(cpf);
         try {
-            return new ResponseEntity("Passageiro " + id + " deletado!" , HttpStatus.OK);
+            return new ResponseEntity("Passageiro " + cpf + " deletado!" , HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity("Esse id não existe!" , HttpStatus.NOT_FOUND);
         }

@@ -2,9 +2,7 @@ package br.com.codewave.codewave.controllers;
 
 import br.com.codewave.codewave.Models.Corrida;
 
-import br.com.codewave.codewave.services.CorridaService;
-import br.com.codewave.codewave.services.MotoristaService;
-import br.com.codewave.codewave.services.PassageiroService;
+import br.com.codewave.codewave.services.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -28,6 +26,12 @@ public class CorridaController {
     @Autowired
     private PassageiroService passageiroService;
 
+    @Autowired
+    private DestinoService destinoService;
+
+    @Autowired
+    private PagamentoService pagamentoService;
+
 
     @PostMapping(value = "/nova")
     @Operation(summary = "Cria uma corrida" , description = "Método que acessa o método adicionar do service e cria uma corrida")
@@ -36,11 +40,12 @@ public class CorridaController {
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
     public ResponseEntity novaCorrida(@RequestBody Corrida corrida,
-                                      @RequestParam(required = false) Integer motoristaId,
-                                      @RequestParam(required = false) Integer passageiroId) {
-        corrida.setMotorista(motoristaService.acharPorId(motoristaId));
-        corrida.setPassageiro(passageiroService.acharPorId(passageiroId));
-
+                                      @RequestParam String cpfMotorista,
+                                      @RequestParam String cpfPassageiro,
+                                      @RequestParam Integer destinoId) {
+        corrida.setMotorista(motoristaService.acharPorId(cpfMotorista));
+        corrida.setPassageiro(passageiroService.acharPorId(cpfPassageiro));
+        corrida.setDestino(destinoService.acharPorId(destinoId));
 
         try {
             corridaService.adicionar(corrida);

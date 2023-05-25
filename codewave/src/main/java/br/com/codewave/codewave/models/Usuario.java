@@ -1,6 +1,7 @@
 package br.com.codewave.codewave.Models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Data;
 
 @Data
@@ -12,6 +13,7 @@ public class Usuario {
     private Integer id;
 
     @Column(length = 100)
+    @Email
     private String email;
 
     @Column(length = 255)

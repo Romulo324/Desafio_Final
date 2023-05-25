@@ -2,24 +2,33 @@ package br.com.codewave.codewave.Models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.validator.constraints.br.CPF;
 
 @Data
 @Entity(name = "tb_motorista")
 public class Motorista {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer cpf;
+    @CPF
+    private String cpf;
 
     private String carro;
 
     @Column(name = "nome_completo", length = 100)
     private String nomeCompleto;
 
-    @Column(name = "nome_da_habilitacao", length = 50)
+    @Column(name = "numero_da_habilitacao", length = 50)
     private String numeroDaHabilitacao;
+
+    private String aceitarCorrida;
+
+    private String finalizarCorrida;
 
     @ManyToOne
     private Empresa empresa;
+
+    private double longitude;
+
+    private double latitude;
 
 }
