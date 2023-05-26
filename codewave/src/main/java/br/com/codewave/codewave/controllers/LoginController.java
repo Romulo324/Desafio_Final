@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/user/login")
 public class LoginController {
     @Autowired
     private UsuarioSecurity usuarioSecurity;
@@ -27,7 +27,7 @@ public class LoginController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @PostMapping("/login")
+    @PostMapping("/admin")
     public ResponseEntity createAuthenticationToken(@RequestBody JwtRequestDto authenticationRequest) throws Exception {
 
         if (!usuarioSecurity.userExist("admin")) {
@@ -47,5 +47,37 @@ public class LoginController {
         }catch (BadCredentialsException e){
             throw new Exception("INVALID_CREDENTIALS", e);
         }
+    }
+    @PostMapping("/motorista")
+    public ResponseEntity createAuthenticationTokenMotorista(@RequestBody JwtRequestDto authenticationRequest) throws Exception {
+        if (!usuarioSecurity.userExist("Elton")) {
+            usuarioSecurity.criarMotorista();
+        }
+        authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        final UserDetails userDetails = usuarioSecurity.loadUserByUsername(authenticationRequest.getUsername());
+        final String token = jwtTokenService.generateToken(userDetails);
+        return new ResponseEntity(new JwtResponseDto(token), HttpStatus.OK);
+    }
+
+    @PostMapping("/passageiro")
+    public ResponseEntity createAuthenticationTokenPassageiro(@RequestBody JwtRequestDto authenticationRequest) throws Exception {
+        if (!usuarioSecurity.userExist("Luiz")) {
+            usuarioSecurity.criarPassageiro();
+        }
+        authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        final UserDetails userDetails = usuarioSecurity.loadUserByUsername(authenticationRequest.getUsername());
+        final String token = jwtTokenService.generateToken(userDetails);
+        return new ResponseEntity(new JwtResponseDto(token), HttpStatus.OK);
+    }
+
+    @PostMapping("/empresa")
+    public ResponseEntity createAuthenticationTokenEmpresa(@RequestBody JwtRequestDto authenticationRequest) throws Exception {
+        if (!usuarioSecurity.userExist("BRQ")) {
+            usuarioSecurity.criarEmpresa();
+        }
+        authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        final UserDetails userDetails = usuarioSecurity.loadUserByUsername(authenticationRequest.getUsername());
+        final String token = jwtTokenService.generateToken(userDetails);
+        return new ResponseEntity(new JwtResponseDto(token), HttpStatus.OK);
     }
 }

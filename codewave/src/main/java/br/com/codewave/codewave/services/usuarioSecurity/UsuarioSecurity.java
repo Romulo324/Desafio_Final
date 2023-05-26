@@ -37,4 +37,36 @@ public class UsuarioSecurity implements UserDetailsService {
 
         usuarioRepositorySecurity.save(userAdmin);
     }
+    public void criarPassageiro(){
+
+        UsuarioSecurityModel userPassageiro = new UsuarioSecurityModel();
+        userPassageiro.setRole(Role.PASSAGEIRO);
+        userPassageiro.setUsername("Luiz");
+        userPassageiro.setPassword(passwordEncoder.encode("123"));
+        userPassageiro.setNomeCompleto("Luiz Pereira Maia");
+
+        usuarioRepositorySecurity.save(userPassageiro);
+    }
+
+    public void criarMotorista(){
+
+        UsuarioSecurityModel userMotorista = new UsuarioSecurityModel();
+        userMotorista.setRole(Role.MOTORISTA);
+        userMotorista.setUsername("Elton");
+        userMotorista.setPassword(passwordEncoder.encode("123"));
+        userMotorista.setNomeCompleto("Elton da Silva Ramos");
+
+        usuarioRepositorySecurity.save(userMotorista);
+    }
+
+    public void criarEmpresa(){
+
+        UsuarioSecurityModel userEmpresa = new UsuarioSecurityModel();
+        userEmpresa.setRole(Role.EMPRESA);
+        userEmpresa.setUsername("BRQ");
+        userEmpresa.setPassword(passwordEncoder.encode("123"));
+        userEmpresa.setNomeCompleto("BRQ Digital Solutions");
+
+        usuarioRepositorySecurity.save(userEmpresa);
+    }
 }
