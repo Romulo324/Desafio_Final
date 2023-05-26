@@ -1,7 +1,5 @@
 package br.com.codewave.codewave.controllers;
 
-import br.com.codewave.codewave.Models.Pagamento;
-
 import br.com.codewave.codewave.services.PagamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

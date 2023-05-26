@@ -1,7 +1,5 @@
 package br.com.codewave.codewave.services;
 
-import br.com.codewave.codewave.Models.Corrida;
-import br.com.codewave.codewave.Models.Pagamento;
 import br.com.codewave.codewave.repositories.PagamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

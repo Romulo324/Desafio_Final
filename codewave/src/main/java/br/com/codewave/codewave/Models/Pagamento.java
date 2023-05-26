@@ -15,12 +15,15 @@ public class Pagamento {
     @Column(precision = 10, scale = 2)
     private BigDecimal valorMinimo;
 
-    @Column(precision = 10, scale = 2)
+    @Column(precision =10, scale = 2)
     private BigDecimal valorFinal;
 
+    private double porcentagemDoMotorista;
 
-    private double porcentagem;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal valorBase;
 
-    @Column(precision =10, scale = 2)
-    private BigDecimal resultadoPorcentagem;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal resultadoPorcentagemDoMotorista;
+
 }
