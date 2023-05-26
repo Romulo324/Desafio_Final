@@ -1,6 +1,5 @@
 package br.com.codewave.codewave.config;
 
-import br.com.codewave.codewave.Models.enums.Role;
 import br.com.codewave.codewave.filtro.JwtAuthenticationEntryPoint;
 import br.com.codewave.codewave.filtro.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class SpringSecurityConfig {
         http
                 .csrf().disable().authorizeHttpRequests()
                 .requestMatchers("/user/login/**","/swagger-ui/**").permitAll()
-                .requestMatchers("/user/login/admin").hasAnyAuthority("ADMIN")
+                .requestMatchers( "/**").hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and().exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
