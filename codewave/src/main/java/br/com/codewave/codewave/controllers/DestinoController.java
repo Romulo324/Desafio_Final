@@ -25,7 +25,8 @@ public class DestinoController {
     @PostMapping(value = "/novo")
     @Operation(summary = "Cria um destino" , description = "Método que acessa o método adicionar do service e cria um destino")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "Created - Destino criado com sucesso!"),
+            @ApiResponse(responseCode = "201" +
+                    "" ,description = "Created - Destino criado com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Parametro não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -41,7 +42,8 @@ public class DestinoController {
     @GetMapping(value = "/listartodos")
     @Operation(summary = "Lista todos os destinos" , description = "Método que acessa o método listarTodos do service e lista todos os destinos")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Destinos listados com sucesso!"),
+            @ApiResponse(responseCode = "200" +
+                    "" ,description = "OK - Destinos listados com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Lista de destinos não localizada!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -56,7 +58,8 @@ public class DestinoController {
     @GetMapping(value = "/listar/{id}")
     @Operation(summary = "Lista um destino" , description = "Método que acessa o método acharPorId do service e lista um destino")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Destino listado com sucesso!"),
+            @ApiResponse(responseCode = "200" +
+                    "" ,description = "OK - Destino listado com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Id do destino não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -71,7 +74,8 @@ public class DestinoController {
     @PutMapping(value = "/atualizar/{id}")
     @Operation(summary = "Atualiza o destino" , description = "Método que acessa o método atualizar do service e atualiza o destino")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Destino atualizado com sucesso!"),
+            @ApiResponse(responseCode = "200" +
+                    "" ,description = "OK - Destino atualizado com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Id do destino não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -87,7 +91,8 @@ public class DestinoController {
     @DeleteMapping(value = "/deletar/{id}")
     @Operation(summary = "Remove destino" , description = "Método que acessa o método remove do service e remove o destino")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Destino removido com sucesso!"),
+            @ApiResponse(responseCode = "200" +
+                    "" ,description = "OK - Destino removido com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Id do destino não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })

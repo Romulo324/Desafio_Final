@@ -66,7 +66,7 @@ public class MotoristaController {
     @GetMapping(value = "/listartodos")
     @Operation(summary = "Lista todos os motoristas" , description = "Método que acessa o método listarTodos do service e lista todos os motoristas")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Motoristas listados com sucesso!"),
+            @ApiResponse(responseCode = "200" ,description = "OK - Motoristas listados com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Lista de motoristas não localizada!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -80,7 +80,7 @@ public class MotoristaController {
     @GetMapping(value = "/localizacao")
     @Operation(summary = "Lista a localização" , description = "Método que acessa o método calculoDeProximidade do service e lista a localização")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Localizaçãp listada com sucesso!"),
+            @ApiResponse(responseCode = "200" ,description = "OK - Localizaçãp listada com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Localização não localizada!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -102,7 +102,7 @@ public class MotoristaController {
     @GetMapping(value = "/listar/{cpf}")
     @Operation(summary = "Lista um motorista" , description = "Método que acessa o método acharPorId do service e lista um motorista")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Motorista listado com sucesso!"),
+            @ApiResponse(responseCode = "200" ,description = "OK - Motorista listado com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - CPF do motorista não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -117,7 +117,7 @@ public class MotoristaController {
     @PutMapping(value = "/atualizar/{cpf}")
     @Operation(summary = "Atualiza o motorista" , description = "Método que acessa o método atualizar do service e atualiza o motorista")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Motorista atualizado com sucesso!"),
+            @ApiResponse(responseCode = "200" ,description = "OK - Motorista atualizado com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - CPF do motorista não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -133,7 +133,7 @@ public class MotoristaController {
     @DeleteMapping(value = "/deletar/{cpf}")
     @Operation(summary = "Remove motorista" , description = "Método que acessa o método remove do service e remove o motorista")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Motorista removido com sucesso!"),
+            @ApiResponse(responseCode = "200" ,description = "OK - Motorista removido com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - CPF do motorista não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -149,7 +149,7 @@ public class MotoristaController {
     @PutMapping(value = "/aceitar/{cpf}")
     @Operation(summary = "Aceita corrida" , description = "Método que acessa o método aceitarCorrida do service e aceita a corrida")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Corrida aceita!"),
+            @ApiResponse(responseCode = "200" ,description = "OK - Corrida aceita!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Id da corrida não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -170,7 +170,7 @@ public class MotoristaController {
     @PutMapping(value = "/finalizar/{cpf}")
     @Operation(summary = "Finaliza corrida" , description = "Método que acessa o método finalizarCorrida do service e finaliza a corrida")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Corrida finalizada!"),
+            @ApiResponse(responseCode = "200" ,description = "OK - Corrida finalizada!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Id da corrida não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -186,7 +186,7 @@ public class MotoristaController {
     @PostMapping(value = "/photo/{cpf}")
     @Operation(summary = "Salva a foto de um motorista" , description = "Método que acessa o método saveFile do FileUpLoadUtil e salva a foto do motorista")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - foto salva com sucesso!"),
+            @ApiResponse(responseCode = "201" ,description = "Created - foto salva com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Cpf da foto não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })

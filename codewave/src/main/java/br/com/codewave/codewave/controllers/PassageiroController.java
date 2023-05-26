@@ -52,7 +52,7 @@ public class PassageiroController {
     @GetMapping(value = "/listartodas")
     @Operation(summary = "Lista todos os passageiros" , description = "Método que acessa o método listarTodos do service e lista todos os passageiros")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - passageiros listados com sucesso!"),
+            @ApiResponse(responseCode = "200" ,description = "OK - passageiros listados com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Lista de passageiros não localizada!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -66,7 +66,7 @@ public class PassageiroController {
     @GetMapping(value = "/localizacao")
     @Operation(summary = "Lista a localização" , description = "Método que acessa o método calculoDeProximidade do service e lista a localização")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Localizaçãp listada com sucesso!"),
+            @ApiResponse(responseCode = "200" ,description = "OK - Localizaçãp listada com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Localização não localizada!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -86,7 +86,7 @@ public class PassageiroController {
     @GetMapping(value = "/listar/{cpf}")
     @Operation(summary = "Lista um passageiro" , description = "Método que acessa o método acharPorId do service e lista um passageiro")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Passageiro listado com sucesso!"),
+            @ApiResponse(responseCode = "200" ,description = "OK - Passageiro listado com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - CPF do passageiro não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -101,7 +101,7 @@ public class PassageiroController {
     @PutMapping(value = "/atualizar/{cpf}")
     @Operation(summary = "Atualiza passageiro" , description = "Método que acessa o método atualizar do service e atualiza o passageiro")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Passageiro atualizado com sucesso!"),
+            @ApiResponse(responseCode = "200" ,description = "OK - Passageiro atualizado com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - CPF do passageiro não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -117,7 +117,7 @@ public class PassageiroController {
     @DeleteMapping(value = "/deletar/{cpf}")
     @Operation(summary = "Remove passageiro" , description = "Método que acessa o método remove do service e remove o passageiro")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Passageiro removido com sucesso!"),
+            @ApiResponse(responseCode = "200" ,description = "OK - Passageiro removido com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - CPF do passageiro não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })

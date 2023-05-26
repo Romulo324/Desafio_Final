@@ -40,7 +40,7 @@ public class PagamentoController {
     @GetMapping(value = "/listartodos")
     @Operation(summary = "Lista todos os pagamentos" , description = "Método que acessa o método listarTodos do service e lista todos os pagamentos")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Pagamentos listados com sucesso!"),
+            @ApiResponse(responseCode = "200" ,description = "OK - Pagamentos listados com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Lista de pagamentos não localizada!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -55,7 +55,7 @@ public class PagamentoController {
     @GetMapping(value = "/listar/{id}")
     @Operation(summary = "Lista um pagamento" , description = "Método que acessa o método acharPorId do service e lista um pagamento")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Pagamento listado com sucesso!"),
+            @ApiResponse(responseCode = "200" ,description = "OK - Pagamento listado com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Id do pagamento não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -70,7 +70,7 @@ public class PagamentoController {
     @PutMapping(value = "/atualizar/{id}")
     @Operation(summary = "Atualiza pagamento" , description = "Método que acessa o método atualizar do service e atualiza o pagamento")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Pagamento atualizado com sucesso!"),
+            @ApiResponse(responseCode = "200" ,description = "OK - Pagamento atualizado com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Id do pagamento não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -84,6 +84,12 @@ public class PagamentoController {
     }
 
     @DeleteMapping(value = "/deletar/{id}")
+    @Operation(summary = "Remove pagamento" , description = "Método que acessa o método remove do service e remove o pagamento")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200" ,description = "OK - Pagamento removido com sucesso!"),
+            @ApiResponse(responseCode = "404" ,description = "Erro - Id do pagamento não localizado!"),
+            @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
+    })
     public ResponseEntity deletar(@PathVariable Integer id) {
         pagamentoService.remove(id);
         try {

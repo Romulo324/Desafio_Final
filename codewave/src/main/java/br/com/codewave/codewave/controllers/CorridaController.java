@@ -59,7 +59,7 @@ public class CorridaController {
     @GetMapping(value = "/listartodas")
     @Operation(summary = "Lista todas as corridas" , description = "Método que acessa o método listarTodos do service e lista todas as corridas")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Corridas listadas com sucesso!"),
+            @ApiResponse(responseCode = "200" ,description = "OK - Corridas listadas com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Lista de corridas não localizada!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -74,7 +74,7 @@ public class CorridaController {
     @GetMapping(value = "/listar/{id}")
     @Operation(summary = "Lista uma corrida" , description = "Método que acessa o método acharPorId do service e lista uma corrida")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Corrida listada com sucesso!"),
+            @ApiResponse(responseCode = "200" ,description = "OK - Corrida listada com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Id da corrida não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -91,7 +91,7 @@ public class CorridaController {
     @PutMapping(value = "/atualizar/{id}")
     @Operation(summary = "Atualiza a corrida" , description = "Método que acessa o método atualizar do service e atualiza a corrida")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Corrida atualizada com sucesso!"),
+            @ApiResponse(responseCode = "200" ,description = "OK - Corrida atualizada com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Id da corrida não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
@@ -107,7 +107,7 @@ public class CorridaController {
     @DeleteMapping(value = "/deletar/{id}")
     @Operation(summary = "Remove corrida" , description = "Método que acessa o método remove do service e remove a corrida")
     @ApiResponses({
-            @ApiResponse(responseCode = "201" ,description = "OK - Corrida removida com sucesso!"),
+            @ApiResponse(responseCode = "200" ,description = "OK - Corrida removida com sucesso!"),
             @ApiResponse(responseCode = "404" ,description = "Erro - Id da corrida não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
