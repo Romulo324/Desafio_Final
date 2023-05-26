@@ -1,5 +1,6 @@
 package br.com.codewave.codewave.Models;
 
+import br.com.codewave.codewave.Models.enums.CorridaEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 

@@ -1,5 +1,6 @@
 package br.com.codewave.codewave.controllers;
 
+import br.com.codewave.codewave.Models.Pagamento;
 import br.com.codewave.codewave.services.PagamentoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

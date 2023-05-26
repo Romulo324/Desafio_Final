@@ -1,6 +1,7 @@
 package br.com.codewave.codewave.services.usuarioSecurity;
 
 import br.com.codewave.codewave.Models.UsuarioSecurityModel;
+import br.com.codewave.codewave.Models.enums.Role;
 import br.com.codewave.codewave.repositories.securityRepository.UsuarioRepositorySecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,6 +30,7 @@ public class UsuarioSecurity implements UserDetailsService {
 
     public void createAdminUser(){
         UsuarioSecurityModel userAdmin = new UsuarioSecurityModel();
+        userAdmin.setRole(Role.ADMIN);
         userAdmin.setUsername("admin");
         userAdmin.setPassword(passwordEncoder.encode("123"));
         userAdmin.setNomeCompleto("Adminstrador");

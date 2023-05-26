@@ -24,7 +24,9 @@ public class SpringSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .csrf().disable().authorizeHttpRequests()
-                .requestMatchers("/user/login/**", "/swagger-ui/**").permitAll()
+                .requestMatchers("/user/login/**","/swagger-ui/**").permitAll()
+                .requestMatchers( "/motorista/**").hasAnyAuthority("ADMIN")
+
                 .anyRequest().authenticated()
                 .and().exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
