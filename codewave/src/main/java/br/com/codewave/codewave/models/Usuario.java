@@ -4,16 +4,16 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
-@Entity(name = "tb_empresa")
-public class Empresa {
+@Entity(name = "tb_usuario")
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer cnpj;
-
-    @Column(length = 255)
-    private String carro;
+    private Integer id;
 
     @Column(length = 100)
-    private String nome;
+    private String email;
+
+    @Column(length = 255)
+    private String senha;
 }

@@ -4,9 +4,9 @@ import br.com.codewave.codewave.Models.Usuario;
 import br.com.codewave.codewave.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class UsuarioService {
     @Autowired
@@ -33,6 +33,7 @@ public class UsuarioService {
             usuarioRepository.save(usuario);
         }
     }
+
     public void remove(Integer id) {
         Usuario pesquisarUsuario = acharPorId(id);
         if (usuarioRepository.existsById(id)){

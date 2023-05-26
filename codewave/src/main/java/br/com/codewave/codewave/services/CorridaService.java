@@ -1,8 +1,11 @@
 package br.com.codewave.codewave.services;
+
 import br.com.codewave.codewave.Models.Corrida;
+import br.com.codewave.codewave.Models.CorridaEnum;
 import br.com.codewave.codewave.repositories.CorridaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +13,9 @@ import java.util.Optional;
 public class CorridaService {
     @Autowired
     public CorridaRepository corridaRepository;
+
+    @Autowired
+    private MotoristaService motoristaService;
 
     public void adicionar(Corrida corridaQueSeraSalvo) {
         corridaRepository.save(corridaQueSeraSalvo);
@@ -38,5 +44,17 @@ public class CorridaService {
         if (corridaRepository.existsById(id)){
             corridaRepository.deleteById(id);
         }
+    }
+
+    public void aceitarCorrida(Corrida corrida, Integer id) {
+        corrida.setMotorista(motoristaService.acharPorId(id));
+        corrida.setStatus(CorridaEnum.EM_ANDAMENTO);
+        corridaRepository.save(corrida);
+    }
+
+    public void finalizarCorrida(Corrida corrida, Integer id) {
+        corrida.setMotorista(motoristaService.acharPorId(id));
+        corrida.setStatus(CorridaEnum.FINALIZADO);
+        corridaRepository.save(corrida);
     }
 }

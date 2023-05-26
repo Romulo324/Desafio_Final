@@ -20,6 +20,7 @@ public class PagamentoService {
         pagamentoRepository.save(pagamentoQueSeraSalvo);
     }
 
+
     public List<Pagamento> listarTodos() {
         return pagamentoRepository.findAll();
     }

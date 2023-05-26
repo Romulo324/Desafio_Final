@@ -3,12 +3,12 @@ spring:
     active: local
   mvc:
     pathmatch:
-      matching-strategy: ant_path_matcher
+      matching-strategy: ant-path-matcher
   datasource:
-    url: jdbc:postgresql://localhost:5432/Desafio_JPA
+    url: jdbc:postgresql://localhost:5432/desafio
     username: postgres
-    password: Spiderman51
+    password: 904090ef
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: true
