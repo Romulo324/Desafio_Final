@@ -5,9 +5,9 @@ spring:
     pathmatch:
       matching-strategy: ant-path-matcher
   datasource:
-    url: jdbc:postgresql://localhost:5432/sprint_7
-    username: postgres
-    password: jucaprevost21112004
+    url: jdbc:postgresql://desafioapi.postgres.database.azure.com:5432/sprint_7
+    username: apiuser
+    password: Ju2111200
   jpa:
     hibernate:
       ddl-auto: create-drop

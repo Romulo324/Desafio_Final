@@ -29,6 +29,7 @@ public class ParadaController {
     @Operation(summary = "Cria um parada" , description = "Método que acessa o método adicionar do service e cria a parada")
     @ApiResponses({
             @ApiResponse(responseCode = "201" ,description = "Created - Parada criada com sucesso!"),
+            @ApiResponse(responseCode = "404" ,description = "Erro - Parametro não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
     public ResponseEntity adicionaParada(@RequestBody Parada parada,

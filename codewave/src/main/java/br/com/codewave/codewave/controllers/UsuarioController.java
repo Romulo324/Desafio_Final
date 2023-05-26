@@ -24,6 +24,7 @@ public class UsuarioController {
     @Operation(summary = "Cria um usuario" , description = "Método que acessa o método adicionar do service e cria usuario")
     @ApiResponses({
             @ApiResponse(responseCode = "201" ,description = "Created - Usuario criado com sucesso!"),
+            @ApiResponse(responseCode = "404" ,description = "Erro - Parametro não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
     public ResponseEntity novoUsuario(@RequestBody Usuario usuario) {

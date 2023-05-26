@@ -26,6 +26,7 @@ public class DestinoController {
     @Operation(summary = "Cria um destino" , description = "Método que acessa o método adicionar do service e cria um destino")
     @ApiResponses({
             @ApiResponse(responseCode = "201" ,description = "Created - Destino criado com sucesso!"),
+            @ApiResponse(responseCode = "404" ,description = "Erro - Parametro não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
     public ResponseEntity novoDestino(@RequestBody Destino destino) {

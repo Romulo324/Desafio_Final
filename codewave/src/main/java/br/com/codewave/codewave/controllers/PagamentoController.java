@@ -25,6 +25,7 @@ public class PagamentoController {
     @Operation(summary = "Cria um pagamento" , description = "Método que acessa o método adicionar do service e cria o pagamento")
     @ApiResponses({
             @ApiResponse(responseCode = "201" ,description = "Created - Pagamento criado com sucesso!"),
+            @ApiResponse(responseCode = "404" ,description = "Erro - Parametro não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
     public ResponseEntity novoPagamento(@RequestBody Pagamento pagamento) {

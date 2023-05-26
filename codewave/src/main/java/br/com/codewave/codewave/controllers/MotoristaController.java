@@ -48,6 +48,7 @@ public class MotoristaController {
     @Operation(summary = "Cria um motorista" , description = "Método que acessa o método adicionar do service e cria o motorista")
     @ApiResponses({
             @ApiResponse(responseCode = "201" ,description = "Created - Pagamento criado com sucesso!"),
+            @ApiResponse(responseCode = "404" ,description = "Erro - Parametro não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
     public ResponseEntity novoMotorista(@Valid @RequestBody Motorista motorista,
@@ -77,6 +78,12 @@ public class MotoristaController {
         }
     }
     @GetMapping(value = "/localizacao")
+    @Operation(summary = "Lista a localização" , description = "Método que acessa o método calculoDeProximidade do service e lista a localização")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201" ,description = "OK - Localizaçãp listada com sucesso!"),
+            @ApiResponse(responseCode = "404" ,description = "Erro - Localização não localizada!"),
+            @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
+    })
     public ResponseEntity localizacao(@RequestParam String cpfPassageiro,
                                       @RequestParam String cpfMotorista) {
 
@@ -177,6 +184,12 @@ public class MotoristaController {
     }
 
     @PostMapping(value = "/photo/{cpf}")
+    @Operation(summary = "Salva a foto de um motorista" , description = "Método que acessa o método saveFile do FileUpLoadUtil e salva a foto do motorista")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201" ,description = "OK - foto salva com sucesso!"),
+            @ApiResponse(responseCode = "404" ,description = "Erro - Cpf da foto não localizado!"),
+            @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
+    })
     public ResponseEntity salvarPhotoMotorista(Motorista motorista, @RequestParam("image")
     MultipartFile multipartFile) throws IOException {
         try {

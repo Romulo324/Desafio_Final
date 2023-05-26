@@ -37,6 +37,7 @@ public class CorridaController {
     @Operation(summary = "Cria uma corrida" , description = "Método que acessa o método adicionar do service e cria uma corrida")
     @ApiResponses({
             @ApiResponse(responseCode = "201" ,description = "Created - Corrida criada com sucesso!"),
+            @ApiResponse(responseCode = "404" ,description = "Erro - Parametro não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
     public ResponseEntity novaCorrida(@RequestBody Corrida corrida,

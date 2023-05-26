@@ -20,10 +20,6 @@ public class Motorista {
     @Column(name = "numero_da_habilitacao", length = 50)
     private String numeroDaHabilitacao;
 
-    private String aceitarCorrida;
-
-    private String finalizarCorrida;
-
     @ManyToOne
     private Empresa empresa;
 

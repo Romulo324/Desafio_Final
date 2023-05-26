@@ -36,6 +36,7 @@ public class PassageiroController {
     @Operation(summary = "Cria um passageiro" , description = "Método que acessa o método adicionar do service e cria passageiro")
     @ApiResponses({
             @ApiResponse(responseCode = "201" ,description = "Created - Passageiro criado com sucesso!"),
+            @ApiResponse(responseCode = "404" ,description = "Erro - Parametro não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
     public ResponseEntity novoPassageiro(@Valid @RequestBody Passageiro passageiro) {
@@ -63,6 +64,12 @@ public class PassageiroController {
         }
     }
     @GetMapping(value = "/localizacao")
+    @Operation(summary = "Lista a localização" , description = "Método que acessa o método calculoDeProximidade do service e lista a localização")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201" ,description = "OK - Localizaçãp listada com sucesso!"),
+            @ApiResponse(responseCode = "404" ,description = "Erro - Localização não localizada!"),
+            @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
+    })
     public ResponseEntity localizacao(@RequestParam String cpfPassageiro,
                                       @RequestParam String cpfMotorista) {
 

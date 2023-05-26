@@ -25,6 +25,7 @@ public class EmpresaController {
     @Operation(summary = "Cria uma empresa" , description = "Método que acessa o método adicionar do service e cria uma empresa")
     @ApiResponses({
             @ApiResponse(responseCode = "201" ,description = "Created - Pagamento criado com sucesso!"),
+            @ApiResponse(responseCode = "404" ,description = "Erro - Parametro não localizado!"),
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
     public ResponseEntity novaEmpresa(@Valid @RequestBody Empresa empresa) {

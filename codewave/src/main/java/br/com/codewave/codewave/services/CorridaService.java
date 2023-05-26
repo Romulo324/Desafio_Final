@@ -45,6 +45,7 @@ public class CorridaService {
         }
     }
 
+
     public void aceitarCorrida(Corrida corrida, String cpf) {
         corrida.setMotorista(motoristaService.acharPorId(cpf));
         corrida.setStatus(CorridaEnum.EM_ANDAMENTO);
