@@ -1,4 +1,4 @@
-package br.com.codewave.codewave.Models;
+package br.com.codewave.codewave.Models.enums;
 
 public enum AvaliacaoEnum {
 

@@ -1,5 +1,6 @@
 package br.com.codewave.codewave.Models;
 
+import br.com.codewave.codewave.Models.enums.AvaliacaoEnum;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

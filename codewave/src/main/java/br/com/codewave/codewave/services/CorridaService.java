@@ -1,6 +1,6 @@
 package br.com.codewave.codewave.services;
 import br.com.codewave.codewave.Models.Corrida;
-import br.com.codewave.codewave.Models.CorridaEnum;
+import br.com.codewave.codewave.Models.enums.CorridaEnum;
 import br.com.codewave.codewave.repositories.CorridaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

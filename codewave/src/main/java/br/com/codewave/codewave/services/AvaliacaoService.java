@@ -1,15 +1,12 @@
 package br.com.codewave.codewave.services;
 
 import br.com.codewave.codewave.Models.Avaliacao;
-import br.com.codewave.codewave.Models.AvaliacaoEnum;
-import br.com.codewave.codewave.Models.Destino;
+import br.com.codewave.codewave.Models.enums.AvaliacaoEnum;
 import br.com.codewave.codewave.repositories.AvaliacaoRepository;
-import br.com.codewave.codewave.repositories.DestinoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import static br.com.codewave.codewave.Models.enums.AvaliacaoEnum.*;
 
 @Service
 public class AvaliacaoService {
