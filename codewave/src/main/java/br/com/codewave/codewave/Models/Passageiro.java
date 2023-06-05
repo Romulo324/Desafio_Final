@@ -13,6 +13,9 @@ public class Passageiro {
     @CPF
     private Integer cpf;
 
+    @Column(length = 10)
+    private String senha;
+
     @Column(length = 100)
     private String nome;
 
