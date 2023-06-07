@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
 
+// Classe de passageiro
 @Data
 @Entity(name = "tb_passageiro")
 public class Passageiro {
@@ -27,4 +28,6 @@ public class Passageiro {
 
     private double longitude;
     private double latitude;
+
+    private String senha;
 }

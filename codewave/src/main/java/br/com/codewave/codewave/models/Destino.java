@@ -3,6 +3,7 @@ package br.com.codewave.codewave.Models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+// Classe de destino
 @Data
 @Entity(name = "tb_destino")
 public class Destino {

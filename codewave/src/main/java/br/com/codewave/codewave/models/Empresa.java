@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.validator.constraints.br.CNPJ;
 
+// Classe de empresa
 @Data
 @Entity(name = "tb_empresa")
 public class Empresa {

@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
+// Classe de corrida
 @Data
 @Entity(name = "tb_corrida")
 public class Corrida {

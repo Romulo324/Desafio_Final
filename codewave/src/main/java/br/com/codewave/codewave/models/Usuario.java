@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Data;
 
+
+// Classe de usuario
 @Data
 @Entity(name = "tb_usuario")
 public class Usuario {

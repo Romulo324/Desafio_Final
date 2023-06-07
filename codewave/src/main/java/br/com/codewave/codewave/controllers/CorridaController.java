@@ -48,6 +48,7 @@ public class CorridaController {
         corrida.setPassageiro(passageiroService.acharPorId(cpfPassageiro));
         corrida.setDestino(destinoService.acharPorId(destinoId));
 
+
         try {
             corridaService.adicionar(corrida);
         }catch (NoSuchElementException e) {

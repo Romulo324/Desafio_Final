@@ -1,9 +1,11 @@
 package br.com.codewave.codewave.Models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
 
+// Classe de motorista
 @Data
 @Entity(name = "tb_motorista")
 public class Motorista {
@@ -27,4 +29,16 @@ public class Motorista {
 
     private double latitude;
 
+    @Column(nullable = true, length = 64)
+    private String photo;
+
+    @Transient
+    public String getPhotosImagePath() {
+        if (photo == null || cpf == null) return null;
+
+        return "motorista-foto/" + cpf + "/" + photo;
+    }
+    private String senha;
+    @Email
+    private String email;
 }

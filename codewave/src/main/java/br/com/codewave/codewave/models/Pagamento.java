@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
+// Classe Pagamento
 @Data
 @Entity(name = "tb_pagamento")
 public class Pagamento {

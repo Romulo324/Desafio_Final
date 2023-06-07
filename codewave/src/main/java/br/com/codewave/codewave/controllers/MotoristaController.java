@@ -4,8 +4,10 @@ import br.com.codewave.codewave.Models.Corrida;
 import br.com.codewave.codewave.Models.Motorista;
 import br.com.codewave.codewave.Models.Pagamento;
 import br.com.codewave.codewave.Models.Passageiro;
+import br.com.codewave.codewave.facade.impl.AceitarCorridaFacadeImpl;
 import br.com.codewave.codewave.repositories.MotoristaRepository;
 import br.com.codewave.codewave.services.*;
+import br.com.codewave.codewave.util.FileUpLoadUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -13,9 +15,16 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/motorista")
@@ -38,6 +47,11 @@ public class MotoristaController {
 
     @Autowired
     private MotoristaRepository motoristaRepository;
+
+    @Autowired
+    private AceitarCorridaFacadeImpl aceitarCorridaFacade;
+    @Autowired
+    private JavaMailSender enviar;
 
 
     @PostMapping(value = "/novo")
@@ -92,7 +106,6 @@ public class MotoristaController {
         }catch (NoSuchElementException e){
             return new ResponseEntity<>("Algum do(s) Id(s) não existe!" , HttpStatus.NOT_FOUND);
         }
-
     }
 
     @GetMapping(value = "/listar/{cpf}")
@@ -151,12 +164,9 @@ public class MotoristaController {
     })
     public ResponseEntity aceitarCorrida(@PathVariable String cpf , @RequestBody Pagamento pagamento,
                                          @RequestParam Integer corridaId) {
-        pagamentoService.adicionar(pagamento);
-        Corrida corrida = corridaService.acharPorId(corridaId);
-        corrida.setPagamento(pagamento);
 
         try {
-            corridaService.aceitarCorrida(corrida, cpf);
+            aceitarCorridaFacade.aceitarCorrida(cpf , pagamento , corridaId);
         } catch (NoSuchElementException e) {
             return new ResponseEntity("Esse id não existe!" , HttpStatus.NOT_FOUND);
         }
@@ -177,5 +187,59 @@ public class MotoristaController {
             return new ResponseEntity("Esse id não existe!" , HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity("Corrida " + cpf + " finalizada!" , HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/foto/{cpf}")
+    public ResponseEntity salvarPhotoCpf(@PathVariable String cpf, @RequestParam("image")
+    MultipartFile multipartFile) throws IOException {
+        try {
+            Optional<Motorista> motoristaOptional = motoristaRepository.findById((cpf));
+            Motorista motorista = motoristaOptional.get();
+
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            motorista.setPhoto(fileName);
+            Motorista photoMotorista = motoristaRepository.save(motorista);
+
+            String upLoaDir = "motorista-foto/" + photoMotorista.getCpf();
+
+            FileUpLoadUtil.saveFile(upLoaDir, fileName, multipartFile);
+
+            return new ResponseEntity("Sua Foto Foi Cadastrada Com SUcesso", HttpStatus.OK);
+
+        }catch (IOException e){
+            return new ResponseEntity("Sua Foto não foi Cadastrada  Tente novamente mais tarde",
+                    HttpStatus.BAD_REQUEST);
+        }
+    }
+    @PostMapping(value = "/recuperar-senha/{email}")
+    @Operation(summary = "Enviar e-mail" , description = "Método que envia o e-mail com a nova senha")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201" ,description = "Created - E-mail enviado!"),
+            @ApiResponse(responseCode = "404" ,description = "Erro - E-mail não encontrado!"),
+            @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
+    })
+    public String recuperarSenha(@PathVariable String email) {
+        Motorista motorista = motoristaService.buscarPorEmail(email);
+
+        if (motorista == null) {
+            return "E-mail não encontrado";
+
+        }
+
+        String novaSenha = motoristaService.gerarNovaSenha();
+        motorista.setSenha(novaSenha);
+        motoristaService.adicionar(motorista);
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(motorista.getEmail());
+        message.setSubject("Nova senha");
+        message.setText("Sua nova senha de acesso é: " + novaSenha);
+
+        try {
+            enviar.send(message);
+            return "E-mail enviado com sucesso";
+        } catch (MailException e) {
+            return "Erro - e-mail não enviado";
+        }
     }
 }

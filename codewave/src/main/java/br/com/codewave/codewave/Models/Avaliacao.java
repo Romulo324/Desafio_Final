@@ -7,6 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
+
+// Classe de avaliação
 @Data
 @Entity
 public class Avaliacao {
