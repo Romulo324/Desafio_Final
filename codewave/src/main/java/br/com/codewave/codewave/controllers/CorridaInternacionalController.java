@@ -34,12 +34,10 @@ public class CorridaInternacionalController {
     public ResponseEntity novaCorridaInternacional(@RequestBody CorridaInternacional corridaInternacional,
                                                    @RequestParam String cpfMotorista,
                                                    @RequestParam String cpfPassageiro,
-                                                   @RequestParam Integer destinoId,
-                                                   @RequestParam String passaporte){
+                                                   @RequestParam Integer destinoId){
 
         corridaInternacional.setMotorista(motoristaService.acharPorId(cpfMotorista));
         corridaInternacional.setPassageiro(passageiroService.acharPorId(cpfPassageiro));
-        corridaInternacional.setPassageiro(passageiroService.procurarNumeroDoPassaporte(passaporte));
         corridaInternacional.setDestino(destinoService.acharPorId(destinoId));
 
         try {
