@@ -1,10 +1,8 @@
 package br.com.codewave.codewave.services;
 
-
 import br.com.codewave.codewave.Models.Passageiro;
 import br.com.codewave.codewave.Models.PassageiroInternacional;
 import br.com.codewave.codewave.repositories.PassageiroInternacionalRepository;
-import br.com.codewave.codewave.repositories.PassageiroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,23 +12,24 @@ import java.util.Optional;
 import static br.com.codewave.codewave.util.Localizacao.haversine;
 
 @Service
-public class PassageiroService {
+public class PassageiroInternacionalService {
+
     @Autowired
-    public PassageiroRepository passageiroRepository;
+    private PassageiroInternacionalRepository passageiroInternacionalRepository;
 
     // Método que adiciona um passageiro
-    public void adicionar(Passageiro passageiroQueSeraSalvo) {
-        passageiroRepository.save(passageiroQueSeraSalvo);
+    public void adicionar(PassageiroInternacional passageiroQueSeraSalvo) {
+        passageiroInternacionalRepository.save(passageiroQueSeraSalvo);
     }
 
     // Método que lista todos os passageiros que foram adicionados
-    public List<Passageiro> listarTodos() {
-        return passageiroRepository.findAll();
+    public List<PassageiroInternacional> listarTodos() {
+        return passageiroInternacionalRepository.findAll();
     }
 
     // Método que procura um passageiro pelo cpf e lista
-    public Passageiro acharPorId(String cpf) {
-        Optional<Passageiro> optionalDestino = passageiroRepository.findByCpf(cpf);
+    public PassageiroInternacional acharPorId(String cpf) {
+        Optional<PassageiroInternacional> optionalDestino = passageiroInternacionalRepository.findByCpf(cpf);
         if (optionalDestino.isEmpty()){
             throw new RuntimeException("Passageiro Não Encontrado");
         }
@@ -38,17 +37,17 @@ public class PassageiroService {
     }
 
     // Método que atualiza um passageiro pelo cpf
-    public void atualizar(String cpf, Passageiro passageiro){
-        if (passageiroRepository.existsById(cpf)){
-            passageiroRepository.save(passageiro);
+    public void atualizar(String cpf, PassageiroInternacional passageiroInternacional){
+        if (passageiroInternacionalRepository.existsById(cpf)){
+            passageiroInternacionalRepository.save(passageiroInternacional);
         }
     }
 
     // Método que remove um passageiro pelo cpf
     public void remove(String cpf) {
-        Passageiro pesquisarDestino = acharPorId(cpf);
-        if (passageiroRepository.existsById((cpf))){
-            passageiroRepository.deleteById((cpf));
+        PassageiroInternacional pesquisarDestino = acharPorId(cpf);
+        if (passageiroInternacionalRepository.existsById((cpf))){
+            passageiroInternacionalRepository.deleteById((cpf));
         }
     }
 
@@ -59,8 +58,8 @@ public class PassageiroService {
         return haversine(latitudePassageiro, longitudePassageiro,
                 latidudeMotorista, longitudeMotorista);
     }
-    public Passageiro buscarPorEmail(String email) {
-        return passageiroRepository.findByEmail(email);
+    public PassageiroInternacional buscarPorEmail(String email) {
+        return passageiroInternacionalRepository.findByEmail(email);
     }
     public String gerarNovaSenha() {
         int length = 12;
@@ -73,4 +72,5 @@ public class PassageiroService {
 
         return newPassword.toString();
     }
+
 }

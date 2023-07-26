@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface PassageiroRepository extends JpaRepository<Passageiro, String> {
     Optional<Passageiro> findByCpf(String cpf);
     Passageiro findByEmail(String email);
+
+    Passageiro findByNumeroDePassaporte(String numeroDePassaporte);
 }

@@ -1,4 +1,4 @@
-package br.com.codewave.codewave.config;
+/*package br.com.codewave.codewave.config;
 
 import br.com.codewave.codewave.repositories.securityRepository.UsuarioRepositorySecurity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,4 +41,4 @@ public class AplicationConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
-}
+}*/

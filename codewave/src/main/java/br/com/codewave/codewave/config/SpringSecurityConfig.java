@@ -1,4 +1,4 @@
-package br.com.codewave.codewave.config;
+/*package br.com.codewave.codewave.config;
 
 import br.com.codewave.codewave.filters.JwtAuthenticationEntryPoint;
 import br.com.codewave.codewave.filters.JwtRequestFilter;
@@ -34,4 +34,4 @@ public class SpringSecurityConfig {
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-}
+}*/

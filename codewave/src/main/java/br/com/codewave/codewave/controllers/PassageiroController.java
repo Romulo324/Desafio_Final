@@ -43,7 +43,6 @@ public class PassageiroController {
             @ApiResponse(responseCode = "500" ,description = "Erro inesperado!")
     })
     public ResponseEntity novoPassageiro(@Valid @RequestBody Passageiro passageiro) {
-
         try {
             passageiroService.adicionar(passageiro);
         }catch (NoSuchElementException e) {

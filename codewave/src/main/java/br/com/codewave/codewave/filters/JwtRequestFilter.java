@@ -1,4 +1,4 @@
-package br.com.codewave.codewave.filters;
+/*package br.com.codewave.codewave.filters;
 
 import br.com.codewave.codewave.securityService.JwtTokenService;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -64,4 +64,4 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request, response);
     }
-}
+}*/

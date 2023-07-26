@@ -1,4 +1,4 @@
-package br.com.codewave.codewave.dto;
+/*package br.com.codewave.codewave.dto;
 
 
 import lombok.AllArgsConstructor;
@@ -12,4 +12,4 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class JwtResponseDto {
     private String token;
-}
+}*/

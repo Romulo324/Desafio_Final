@@ -2,6 +2,7 @@ package br.com.codewave.codewave.controllers;
 
 import br.com.codewave.codewave.Models.Corrida;
 
+import br.com.codewave.codewave.Models.Passageiro;
 import br.com.codewave.codewave.services.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

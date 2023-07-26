@@ -1,4 +1,4 @@
-package br.com.codewave.codewave.securityService;
+/*package br.com.codewave.codewave.securityService;
 
 import br.com.codewave.codewave.repositories.securityRepository.UsuarioRepositorySecurity;
 import br.com.codewave.codewave.usuarioSecurity.UsuarioSecurityModel;
@@ -36,4 +36,4 @@ public class UsuarioSecurityService implements UserDetailsService {
 
         usuarioRepositorySecurity.save(userAdmin);
     }
-}
+}*/

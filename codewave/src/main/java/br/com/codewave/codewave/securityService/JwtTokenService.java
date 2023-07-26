@@ -1,4 +1,4 @@
-package br.com.codewave.codewave.securityService;
+/*package br.com.codewave.codewave.securityService;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -71,4 +71,4 @@ public class JwtTokenService {
         byte[] keyBytes = Decoders.BASE64.decode(secret);
         return Keys.hmacShaKeyFor(keyBytes);
     }
-}
+}*/

@@ -1,4 +1,4 @@
-package br.com.codewave.codewave.filters;
+/*package br.com.codewave.codewave.filters;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,4 +16,4 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
                          AuthenticationException authException) throws IOException, ServletException {
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED,"Não autorizado!");
     }
-}
+}*/

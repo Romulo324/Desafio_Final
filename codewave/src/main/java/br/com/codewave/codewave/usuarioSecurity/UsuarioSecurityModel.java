@@ -1,4 +1,4 @@
-package br.com.codewave.codewave.usuarioSecurity;
+/*package br.com.codewave.codewave.usuarioSecurity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -52,4 +52,4 @@ public class UsuarioSecurityModel implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-}
+}*/

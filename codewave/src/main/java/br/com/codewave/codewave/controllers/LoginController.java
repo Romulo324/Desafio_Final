@@ -1,4 +1,4 @@
-package br.com.codewave.codewave.controllers;
+/*package br.com.codewave.codewave.controllers;
 
 import br.com.codewave.codewave.dto.JwtRequestDto;
 import br.com.codewave.codewave.dto.JwtResponseDto;
@@ -52,4 +52,4 @@ public class LoginController {
             throw new Exception("INVALID_CREDENTIALS", e);
         }
     }
-}
+}*/

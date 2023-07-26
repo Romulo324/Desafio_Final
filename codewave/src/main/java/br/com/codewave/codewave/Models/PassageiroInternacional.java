@@ -1,16 +1,15 @@
 package br.com.codewave.codewave.Models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
 
-// Classe de passageiro
 @Data
-@Entity(name = "tb_passageiro")
-public class Passageiro {
+@Entity(name = "tb_passageiro_internacional")
+public class PassageiroInternacional {
 
     @Id
     @CPF
@@ -22,6 +21,8 @@ public class Passageiro {
     @Column(length = 100)
     @Email
     private String email;
+
+    private String numeroPassaporte;
 
     @Column(length = 9, name = "numero_de_telefone")
     private String numeroDeTelefone;

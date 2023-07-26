@@ -1,4 +1,4 @@
-package br.com.codewave.codewave.dto;
+/*package br.com.codewave.codewave.dto;
 
 import lombok.Data;
 
@@ -6,4 +6,4 @@ import lombok.Data;
 public class JwtRequestDto {
     private String password;
     private String username;
-}
+}*/
